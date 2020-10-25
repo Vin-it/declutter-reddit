@@ -1,0 +1,25 @@
+{
+  "name": "declutter-reddit",
+  "version": "1.0.0",
+  "description": "App to search/export saved or hidden Reddit links",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vin-it/declutter-reddit.git"
+  },
+  "author": "Vinit Kumbharkar",
+  "license": "SEE LICENSE IN LICENSE",
+  "bugs": {
+    "url": "https://github.com/Vin-it/declutter-reddit/issues"
+  },
+  "homepage": "https://github.com/Vin-it/declutter-reddit#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
