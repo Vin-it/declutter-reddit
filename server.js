@@ -1,4 +1,6 @@
 const express = require('express');
+const Knex = require('knex');
+const connection = require('./lib/database/knexfile').development;
 
 const app = express();
 
