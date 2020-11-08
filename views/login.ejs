@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Reddit Personal Client</title>
+    </head>
+    <body>
+    <h1>Login Page</h1>
+    <a href="https://www.reddit.com/api/v1/authorize?client_id=cRK7NdBz_RrtaA&response_type=code&state=dalsdkakd&redirect_uri=http://127.0.0.1:3000/reddit-redirect&duration=permanent&scope=identity,history,read">
+        Click here Sign up with reddit 
+    </a>
+
+    <form action="http://127.0.0.1:4000/login" method="POST">
+        <input type="text" placeholder="Enter your reddit username" name="username" /> <br />
+        <input type="password" placeholder="Password" />
+        <input type="submit" />
+    </form>
+ </body>
