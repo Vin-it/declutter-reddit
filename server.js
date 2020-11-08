@@ -5,6 +5,7 @@ const app = express();
 
 const { PORT } = require('./lib/constants/app');
 
+app.set('view engine', 'ejs');
 app.use(session({
   secret: 'fakeSecret',
   resave: false,
@@ -21,7 +22,11 @@ app.get('/', (req, res) => {
 });
 
 app.get('/login', (req, res) => {
-  res.send('Click here to authorize this app to use your reddit account or if you have already done so please enter your username below');
+  res.render('login');
+});
+
+app.post('/login', (req, res) => {
+  res.send('Received login');
 });
 
 app.listen(PORT, () => {

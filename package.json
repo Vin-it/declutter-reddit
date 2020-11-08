@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Vin-it/declutter-reddit#readme",
   "dependencies": {
+    "ejs": "^3.1.5",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "knex": "^0.21.6",
