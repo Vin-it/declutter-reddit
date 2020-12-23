@@ -5,6 +5,7 @@ const app = express();
 
 const { PORT } = require('./lib/constants/app');
 const { CLIENT_ID, REDIRECT_URI } = require('./lib/constants/oauth');
+const handlers = require('./lib/routes/oauth/get-redirect');
 
 app.set('view engine', 'ejs');
 app.use(session({
@@ -32,6 +33,8 @@ app.get('/login', (req, res) => {
 app.post('/login', (req, res) => {
   res.send('Received login');
 });
+
+app.get('/redirect/reddit', require('./lib/routes/oauth/get-redirect'));
 
 app.listen(PORT, () => {
   console.log('App is listening to', PORT);
