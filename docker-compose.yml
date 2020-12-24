@@ -3,11 +3,12 @@ version: '3'
 services: 
     declutter-reddit:
         build: . 
-        command: ./node_modules/.bin/nodemon server.js
+        command: ./node_modules/.bin/nodemon --inspect=0.0.0.0:9229 server.js
         volumes: 
             - .:/usr/src/app
         ports: 
-            - "4000:3000"
+            - "3000:3000"
+            - "9229:9229"
         depends_on: 
             - db-reddit
             - migration

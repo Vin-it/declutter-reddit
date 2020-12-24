@@ -102,3 +102,9 @@ dist
 
 # TernJS port file
 .tern-port
+
+# IDE Specific config
+.vscode
+
+# Sensitive config
+lib/constants/oauth.js
