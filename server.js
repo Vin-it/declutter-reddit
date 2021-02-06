@@ -5,22 +5,21 @@ const app = express();
 
 const { PORT } = require('./lib/constants/app');
 const { CLIENT_ID, REDIRECT_URI } = require('./lib/constants/oauth');
-const handlers = require('./lib/routes/oauth/get-redirect');
 
 app.set('view engine', 'ejs');
 app.use(session({
   secret: 'fakeSecret',
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: false }
-}))
+  cookie: { secure: false },
+}));
 
 app.get('/', (req, res) => {
   if (!res.locals.isInSession) {
     res.redirect('/login');
-} else {
-    res.send("Home");
-}
+  } else {
+    res.send('Home');
+  }
 });
 
 app.get('/login', (req, res) => {

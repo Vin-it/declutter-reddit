@@ -4,7 +4,7 @@
   "description": "App to search/export saved or hidden Reddit links",
   "main": "server.js",
   "scripts": {
-    "lint": "./node_modules/.bin/eslint lib",
+    "lint": "./node_modules/.bin/eslint lib server.js",
     "test": "./node_modules/.bin/jest"
   },
   "repository": {
