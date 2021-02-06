@@ -1,11 +1,14 @@
 const express = require('express');
 const session = require('express-session');
 
-const app = express();
+const { initDebug, getLogger } = require('./lib/utils/debug');
 
 const { PORT } = require('./lib/constants/app');
 const { CLIENT_ID, REDIRECT_URI } = require('./lib/constants/oauth');
 
+const app = express();
+
+initDebug();
 app.set('view engine', 'ejs');
 app.use(session({
   secret: 'fakeSecret',
@@ -36,5 +39,5 @@ app.post('/login', (req, res) => {
 app.get('/redirect/reddit', require('./lib/routes/oauth/get-redirect'));
 
 app.listen(PORT, () => {
-  console.log('App is listening to', PORT);
+  getLogger('debugServer')('App is listening to', PORT);
 });
