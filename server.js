@@ -5,6 +5,7 @@ const { initDebug, getLogger } = require('./lib/utils/debug');
 
 const { PORT } = require('./lib/constants/app');
 const { CLIENT_ID, REDIRECT_URI } = require('./lib/constants/oauth');
+const { isInSession } = require('./lib/middleware/user');
 
 const app = express();
 
@@ -17,7 +18,7 @@ app.use(session({
   cookie: { secure: false },
 }));
 
-app.get('/', (req, res) => {
+app.get('/', isInSession, (req, res) => {
   if (!res.locals.isInSession) {
     res.redirect('/login');
   } else {
