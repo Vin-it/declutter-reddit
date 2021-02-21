@@ -18,7 +18,7 @@ services:
         tty: true
     migration:
         build: .
-        command: ./node_modules/.bin/knex --knexfile ./lib/database/knexfile.js migrate:latest
+        command: ./wait-for-it/wait-for-it.sh db-reddit:3306 -- ./node_modules/.bin/knex --knexfile ./lib/database/knexfile.js migrate:latest
         depends_on: 
             - db-reddit
         environment: 
