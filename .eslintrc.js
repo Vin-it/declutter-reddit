@@ -16,7 +16,5 @@ module.exports = {
   plugins: [
     'react',
   ],
-  ignorePatternss: ["lib/database/migrations"],
-  rules: {
-  },
+  ignorePatterns: ["lib/database/migrations"],
 };
