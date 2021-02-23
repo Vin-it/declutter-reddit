@@ -1,15 +1,13 @@
 const express = require('express');
 const session = require('express-session');
 
-const { initDebug, getLogger } = require('./lib/utils/debug');
+const { initDebug, logServer } = require('./lib/utils/debug');
 
+const router = require('./lib/router');
 const { PORT } = require('./lib/constants/app');
-const { CLIENT_ID, REDIRECT_URI } = require('./lib/constants/oauth');
-const { isInSession } = require('./lib/middleware/user');
 
 const app = express();
 
-initDebug();
 app.set('view engine', 'ejs');
 app.use(session({
   secret: 'fakeSecret',
@@ -17,28 +15,10 @@ app.use(session({
   saveUninitialized: true,
   cookie: { secure: false },
 }));
-
-app.get('/', isInSession, (req, res) => {
-  if (!res.locals.isInSession) {
-    res.redirect('/login');
-  } else {
-    res.send('Home');
-  }
-});
-
-app.get('/login', (req, res) => {
-  res.render('login', {
-    clientId: CLIENT_ID,
-    redirectUri: REDIRECT_URI,
-  });
-});
-
-app.post('/login', (req, res) => {
-  res.send('Received login');
-});
-
-app.get('/redirect/reddit', require('./lib/routes/oauth/get-redirect'));
+app.use(router);
 
 app.listen(PORT, () => {
-  getLogger('debugServer')('App is listening to', PORT);
+  initDebug();
+
+  logServer('App is listening to', PORT);
 });
