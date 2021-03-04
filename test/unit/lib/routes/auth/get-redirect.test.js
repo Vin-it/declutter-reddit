@@ -7,7 +7,7 @@ jest.mock('../../../../../lib/queries/users');
 const { insertUserIfNotExist } = require('../../../../../lib/queries/users');
 const { exchangeCodeForTokensReq, getUserInfo } = require('../../../../../lib/services/reddit');
 const { calcExpiresOn } = require('../../../../../lib/utils/date');
-const { logDatabase } = require('../../../../../lib/utils/debug');
+const { logDatabase, logRequest } = require('../../../../../lib/utils/debug');
 
 const getRedirect = require('../../../../../lib/routes/auth/get-redirect');
 
@@ -20,26 +20,32 @@ describe('lib/routes/auth/get-redirect', () => {
     session: {},
   };
   const fakeRes = {
-    status: () => ({
-      json: jest.fn(),
-      send: jest.fn(),
-    }),
+    status: jest.fn(() => fakeRes),
+    json: jest.fn(),
+    send: jest.fn(),
     render: jest.fn(),
   };
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
   it('should call render method', async () => {
     const expectedDate = new Date();
-    exchangeCodeForTokensReq.mockResolvedValue({
+
+    exchangeCodeForTokensReq.mockResolvedValueOnce({
       data: {
         access_token: 'accessToken',
         refresh_token: 'refreshToken',
         expires_in: 3600,
       },
     });
-    insertUserIfNotExist.mockResolvedValue(1);
-    getUserInfo.mockResolvedValue({
+    insertUserIfNotExist.mockResolvedValueOnce(1);
+    getUserInfo.mockResolvedValueOnce({
       data: { name: 'fakeUsername' },
     });
-    calcExpiresOn.mockReturnValue(expectedDate);
+    calcExpiresOn.mockReturnValueOnce(expectedDate);
+
     await getRedirect(fakeReq, fakeRes);
 
     expect(exchangeCodeForTokensReq).toHaveBeenCalledWith('fakeCode');
@@ -54,5 +60,16 @@ describe('lib/routes/auth/get-redirect', () => {
         username: 'fakeUsername',
       },
     });
+  });
+
+  it('should catch an error, log it, and respond with 400 status code', async () => {
+    const expectedError = new Error('Exchange code for token failed!');
+    exchangeCodeForTokensReq.mockRejectedValueOnce(expectedError);
+
+    await getRedirect(fakeReq, fakeRes);
+
+    expect(logRequest).toHaveBeenCalledWith('getRedirect error: Exchange code for token failed!');
+    expect(fakeRes.status).toHaveBeenCalledWith(400);
+    expect(fakeRes.status().send).toHaveBeenCalledWith({ success: false });
   });
 });
