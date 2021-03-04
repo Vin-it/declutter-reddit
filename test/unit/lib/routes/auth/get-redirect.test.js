@@ -3,7 +3,6 @@ jest.mock('../../../../../lib/services/reddit');
 jest.mock('../../../../../lib/utils/debug');
 jest.mock('../../../../../lib/utils/date');
 jest.mock('../../../../../lib/queries/users');
-jest.mock('../../../../../lib/constants/oauth_template');
 
 const { insertUserIfNotExist } = require('../../../../../lib/queries/users');
 const getRedirect = require('../../../../../lib/routes/auth/get-redirect');
