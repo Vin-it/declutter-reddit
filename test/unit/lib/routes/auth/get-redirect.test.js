@@ -1,14 +1,15 @@
-jest.mock('axios');
+jest.mock('config', () => {});
 jest.mock('../../../../../lib/services/reddit');
 jest.mock('../../../../../lib/utils/debug');
 jest.mock('../../../../../lib/utils/date');
 jest.mock('../../../../../lib/queries/users');
 
 const { insertUserIfNotExist } = require('../../../../../lib/queries/users');
-const getRedirect = require('../../../../../lib/routes/auth/get-redirect');
 const { exchangeCodeForTokensReq, getUserInfo } = require('../../../../../lib/services/reddit');
 const { calcExpiresOn } = require('../../../../../lib/utils/date');
 const { logDatabase } = require('../../../../../lib/utils/debug');
+
+const getRedirect = require('../../../../../lib/routes/auth/get-redirect');
 
 describe('lib/routes/auth/get-redirect', () => {
   const fakeReq = {
