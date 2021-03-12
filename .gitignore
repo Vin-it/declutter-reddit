@@ -105,6 +105,3 @@ dist
 
 # IDE Specific config
 .vscode
-
-# Sensitive config
-lib/constants/oauth.js
