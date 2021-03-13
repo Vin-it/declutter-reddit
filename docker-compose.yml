@@ -3,7 +3,7 @@ version: '3'
 services: 
     declutter-reddit:
         build: . 
-        command: ./node_modules/.bin/nodemon --inspect=0.0.0.0:9229 server.js
+        command: ./node_modules/.bin/nodemon --inspect=0.0.0.0:9229 -r dotenv/config server.js
         volumes: 
             - .:/usr/src/app
         ports: 
