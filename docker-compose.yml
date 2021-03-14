@@ -15,6 +15,7 @@ services:
         environment: 
             - DB_HOST=db-reddit
             - DEBUG=debug*
+            - NODE_ENV=development
         tty: true
     migration:
         build: .
