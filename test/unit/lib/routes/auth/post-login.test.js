@@ -1,4 +1,5 @@
 jest.mock('config', () => {});
+jest.mock('../../../../../lib/database/models/User', () => {});
 jest.mock('../../../../../lib/services/reddit');
 jest.mock('../../../../../lib/queries/users');
 jest.mock('../../../../../lib/utils/date');
