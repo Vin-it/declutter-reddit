@@ -2,6 +2,8 @@ const express = require('express');
 const session = require('express-session');
 const config = require('config');
 
+const knex = require('./lib/database/knex');
+const objection = require('./lib/database/objection');
 const { initDebug, logServer } = require('./lib/utils/debug');
 const router = require('./lib/router');
 
@@ -21,6 +23,8 @@ function initApp() {
   const app = express();
 
   // Add migrations here
+  knex.init();
+  objection.init();
   initDebug();
   initMiddlewares(app);
 
