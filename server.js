@@ -22,9 +22,9 @@ function initApp() {
   const { PORT } = config.get('app');
   const app = express();
 
-  // Add migrations here
+  // Add migration runner here
   knex.init();
-  objection.init();
+  objection.init(knex.getInstance());
   initDebug();
   initMiddlewares(app);
 
