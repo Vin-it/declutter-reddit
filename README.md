@@ -6,7 +6,9 @@ App to export/search saved or hidden reddit links
     - https://github.com/nvm-sh/nvm/blob/master/README.md
 2. Run `nvm use`
 3. Run `npm install`
-4. Add `lib/constants/oauth.js` file with proper credentials/constants for your OAuth2 reddit app
-    - A template (`oauth_template.js`) is included with this code base. To use it simply add the credentials and rename it to `oauth.js` 
+4. You will have to create a `.env` file and set three variables (***DO NOT PUSH THESE VALUES TO YOUR REPOSITORY***)
+    1. `REDDIT_APP_CLIENT_ID=<value>`
+    2. `REDDIT_APP_CLIENT_SECRET=<value>`
+    3. `REDDIT_APP_REDIRECT_URI=<value>`
     - For more information check https://github.com/reddit-archive/reddit/wiki/OAuth2
-5. Run `docker-compose up`
+5. Run `docker compose up` (not a typo - Docker Compose is now in the Docker CLI)
