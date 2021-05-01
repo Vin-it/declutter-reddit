@@ -2,9 +2,9 @@ const express = require('express');
 const session = require('express-session');
 const config = require('config');
 
-const knex = require('./lib/database/knex');
-const objection = require('./lib/database/objection');
-const { initDebug, logServer } = require('./lib/utils/debug');
+const { init: initKnex, getInstance: getKnexInstance } = require('./lib/database/knex');
+const { init: initObjection } = require('./lib/database/objection');
+const { init: initDebug, logServer } = require('./lib/utils/debug');
 const router = require('./lib/router');
 
 function initMiddlewares(app) {
@@ -21,10 +21,12 @@ function initMiddlewares(app) {
 function initApp() {
   const { PORT } = config.get('app');
   const app = express();
+  const knex = getKnexInstance;
 
   // Add migration runner here
-  knex.init();
-  objection.init(knex.getInstance());
+
+  initKnex();
+  initObjection(knex());
   initDebug();
   initMiddlewares(app);
 
