@@ -4,7 +4,7 @@ const config = require('config');
 
 const { init: initKnex, getInstance: getKnexInstance } = require('./lib/database/knex');
 const { init: initObjection } = require('./lib/database/objection');
-const { init: initDebug, logServer } = require('./lib/utils/debug');
+const { init: initDebug, logServer, logDatabase } = require('./lib/utils/debug');
 const router = require('./lib/router');
 
 function initMiddlewares(app) {
@@ -18,16 +18,25 @@ function initMiddlewares(app) {
   app.use(router);
 }
 
-function initApp() {
+async function initMigrations(knex) {
+  return knex.migrate.latest({
+    directory: 'lib/database/migrations',
+  }).then(() => {
+    logDatabase('Migrations ran succcessfully');
+  }).catch((error) => {
+    logDatabase('Error running migrations', error.message);
+  });
+}
+
+async function initApp() {
   const { PORT } = config.get('app');
   const app = express();
   const knex = getKnexInstance;
 
-  // Add migration runner here
-
+  initDebug();
   initKnex();
   initObjection(knex());
-  initDebug();
+  await initMigrations(knex());
   initMiddlewares(app);
 
   app.listen(PORT, () => {
