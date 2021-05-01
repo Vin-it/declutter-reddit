@@ -11,19 +11,11 @@ services:
             - "9229:9229"
         depends_on: 
             - db-reddit
-            - migration
         environment: 
             - DB_HOST=db-reddit
             - DEBUG=debug*
             - NODE_ENV=development
         tty: true
-    migration:
-        build: .
-        command: ./wait-for-it/wait-for-it.sh -t 60 db-reddit:3306 -- ./node_modules/.bin/knex --knexfile ./lib/database/knexfile.js migrate:latest
-        depends_on: 
-            - db-reddit
-        environment: 
-            - DB_HOST=db-reddit
     db-reddit:
         image: mysql
         command: --default-authentication-plugin=mysql_native_password
