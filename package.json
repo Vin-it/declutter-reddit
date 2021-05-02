@@ -4,6 +4,7 @@
   "description": "App to search/export saved or hidden Reddit links",
   "main": "declutter-reddit.js",
   "scripts": {
+    "start": "node declutter-reddit.js",
     "lint": "./node_modules/.bin/eslint lib server.js",
     "test": "./node_modules/.bin/jest"
   },
