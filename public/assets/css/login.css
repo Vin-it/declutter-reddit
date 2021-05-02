@@ -1,0 +1,31 @@
+* {
+    background-color: #f0f0ff;
+    font-family: Arial;
+}
+
+.user-registration {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100%;
+    min-height: 100vh;
+}
+
+.sign-up-link {
+    text-decoration: none;
+}
+
+.input-div {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.btn-login {
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.input {
+    padding: 5px; 
+}

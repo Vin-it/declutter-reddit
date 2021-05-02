@@ -1,17 +1,28 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" href="static/assets/css/login.css" />
         <title>Reddit Personal Client</title>
     </head>
     <body>
-    <h1>Login Page</h1>
-    <a href="https://www.reddit.com/api/v1/authorize?client_id=<%=clientId%>&response_type=code&state=dalsdkakd&redirect_uri=<%=redirectUri%>&duration=permanent&scope=identity,history,read">
-        Click here Sign up with reddit 
-    </a>
-
-    <form action="/login" method="POST">
-        <input type="text" placeholder="Enter your reddit username" name="username" /> <br />
-        <input type="password" placeholder="Password" />
-        <input type="submit" />
-    </form>
+        <div class="user-registration">
+            <div class="sign-up-link-dev">
+                <a class="sign-up-link" href="https://www.reddit.com/api/v1/authorize?client_id=<%=clientId%>&response_type=code&state=dalsdkakd&redirect_uri=<%=redirectUri%>&duration=permanent&scope=identity,history,read">
+                    Don't have an account? Click here to sign up using reddit
+                </a>
+            </div>
+            <div class="form-div">
+                <form action="/login" method="POST">
+                    <div class="input-div">
+                        <input class="input input-username" type="text" placeholder="Enter your reddit username" name="username" /> <br />
+                    </div>
+                    <div class="input-div">
+                        <input class="input input-password" type="password" placeholder="Password" />
+                    </div>
+                    <div class="btn-login-div">
+                        <input class="btn-login" type="submit" />
+                    </div>
+                </form>
+            </div>
+        </div>
  </body>
