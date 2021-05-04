@@ -1,3 +1,5 @@
+const _ = require('lodash');
+
 const constants = require('../../../config/default');
 
 const config = {
@@ -15,6 +17,6 @@ const config = {
   },
 };
 module.exports = {
-  get: (prop) => (config[prop]),
+  get: (path) => (_.get(config, path)),
   config,
 };
