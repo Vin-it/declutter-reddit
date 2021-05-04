@@ -1,3 +1,4 @@
+jest.mock('config');
 jest.mock('../../../../../lib/database/models/User', () => {});
 jest.mock('../../../../../lib/services/reddit');
 jest.mock('../../../../../lib/utils/debug');
@@ -10,7 +11,9 @@ const { refreshAccessToken } = require('../../../../../lib/services/reddit');
 const { calcExpiresOn } = require('../../../../../lib/utils/date');
 const { logDatabase, logRequest } = require('../../../../../lib/utils/debug');
 
-describe('lib/routes/auth', () => {
+const { config } = require('../../../__mocks__/config');
+
+describe('lib/routes/auth/post-login', () => {
   beforeEach(() => jest.clearAllMocks());
 
   const fakeReq = {
@@ -25,6 +28,7 @@ describe('lib/routes/auth', () => {
     send: jest.fn(),
     json: jest.fn(),
   };
+  const fakeNext = jest.fn();
 
   const username = 'fakeUsername';
   const accessToken = 'fakeAccessToken';
@@ -37,18 +41,24 @@ describe('lib/routes/auth', () => {
   it('should throw an error if the user is not found in the database', async () => {
     getUserByUsername.mockResolvedValueOnce([]);
 
-    const returnedRes = await postLogin(fakeReq, fakeRes);
+    const {
+      USER_NOT_FOUND,
+    } = config.errors.codes;
+    const expectedErrorMessage = 'Incorrect combination of username and password';
+    const returnedRes = await postLogin(fakeReq, fakeRes, fakeNext);
 
     expect(logDatabase).toHaveBeenCalledWith(
       'Error while getting the user',
-      'Incorrect combination of username and password',
+      expectedErrorMessage,
     );
-    expect(fakeRes.json).toHaveBeenCalledWith({
-      message: 'Incorrect combination of username and password',
-      success: false,
-    });
     expect(returnedRes).toStrictEqual({
       success: false,
+    });
+    expect(fakeNext).toHaveBeenCalledWith({
+      code: USER_NOT_FOUND,
+      expose: true,
+      message: expectedErrorMessage,
+      status: 404,
     });
   });
 
@@ -59,6 +69,7 @@ describe('lib/routes/auth', () => {
     getUserByUsername.mockResolvedValueOnce([
       user,
     ]);
+
     await postLogin(fakeReq, fakeRes);
 
     expect(getUserByUsername).toHaveBeenCalledWith('fakeUsername');
@@ -92,18 +103,24 @@ describe('lib/routes/auth', () => {
     });
     updateAccessToken.mockResolvedValueOnce(0);
 
-    const returnedRes = await postLogin(fakeReq, fakeRes);
+    const {
+      INSERT_FAIL,
+    } = config.errors.codes;
+
+    const returnedRes = await postLogin(fakeReq, fakeRes, fakeNext);
 
     expect(logRequest).toHaveBeenCalledWith(
       'Error while handling expired access token',
       'Failed to insert refreshed access token into the database',
     );
-    expect(fakeRes.json).toHaveBeenCalledWith({
-      message: 'something went wrong',
-      success: false,
-    });
     expect(returnedRes).toStrictEqual({
       success: false,
+    });
+    expect(fakeNext).toHaveBeenCalledWith({
+      code: INSERT_FAIL,
+      message: 'Failed to insert refreshed access token into the database',
+      expose: false,
+      status: 500,
     });
   });
 
