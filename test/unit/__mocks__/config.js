@@ -1,3 +1,5 @@
+const _ = require('lodash');
+
 const constants = require('../../../config/default');
 
 const config = {
@@ -9,8 +11,12 @@ const config = {
     REDIRECT_URI: 'fake-redirect-url',
     REDDIT_OAUTH_TOKEN_URL: 'fake-oauth-token-url',
   },
+  reddit: {
+    ...constants.reddit,
+    REDDIT_API_BASE_URL: 'https://fake-reddit-api-url.com',
+  },
 };
 module.exports = {
-  get: (prop) => (config[prop]),
+  get: (path) => (_.get(config, path)),
   config,
 };
