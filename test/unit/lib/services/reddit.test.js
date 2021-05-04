@@ -25,13 +25,19 @@ describe('lib/services/reddit', () => {
       } = config.oauth;
       const code = 'fake-authorization-code';
 
+      const body = new URLSearchParams({
+        grant_type: GRANT_TYPE_AUTH_CODE,
+        code,
+        redirect_uri: REDIRECT_URI,
+      });
+
       axios.post.mockResolvedValueOnce({ success: true });
 
       const response = await exchangeCodeForTokensReq(code);
 
       expect(axios.post).toHaveBeenCalledWith(
         'fake-oauth-token-url',
-        `grant_type=${GRANT_TYPE_AUTH_CODE}&code=${code}&redirect_uri=${REDIRECT_URI}`,
+        body,
         {
           auth: {
             username: CLIENT_ID,
@@ -63,5 +69,9 @@ describe('lib/services/reddit', () => {
         expect(error.message).toEqual(REDDIT_REQUEST_ERR_MESSAGE);
       }
     });
+  });
+
+  describe('getUserInfo()', () => {
+
   });
 });
