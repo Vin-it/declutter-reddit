@@ -4,9 +4,12 @@
   "description": "App to search/export saved or hidden Reddit links",
   "main": "declutter-reddit.js",
   "scripts": {
+    "heroku-prebuild": "npm install --also=dev && npm run react-app",
     "start": "node declutter-reddit.js",
     "lint": "./node_modules/.bin/eslint lib server.js",
-    "test": "./node_modules/.bin/jest"
+    "test": "./node_modules/.bin/jest",
+    "react-app": "webpack --mode production",
+    "react-app:serve": "webpack serve"
   },
   "repository": {
     "type": "git",
@@ -30,9 +33,16 @@
     "express-session": "^1.17.1",
     "knex": "^0.21.6",
     "mysql2": "^2.2.5",
-    "objection": "^2.2.3"
+    "objection": "^2.2.3",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   },
   "devDependencies": {
+    "@babel/core": "^7.14.0",
+    "@babel/node": "^7.13.13",
+    "@babel/preset-env": "^7.14.1",
+    "@babel/preset-react": "^7.13.13",
+    "babel-loader": "^8.2.2",
     "eslint": "^7.12.0",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-config-airbnb-base": "^14.2.0",
@@ -40,8 +50,17 @@
     "eslint-plugin-jsx-a11y": "^6.3.1",
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "html-webpack-plugin": "^5.3.1",
     "jest": "^26.6.1",
     "lodash": "^4.17.21",
-    "nodemon": "^2.0.6"
+    "nodemon": "^2.0.6",
+    "webpack": "^5.36.2",
+    "webpack-cli": "^4.6.0",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "dist"
+    ]
   }
 }
