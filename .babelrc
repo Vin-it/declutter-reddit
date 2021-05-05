@@ -8,6 +8,11 @@
             }
           }
         ],
-        "@babel/react"
+        [
+          "@babel/react",
+          {
+            "runtime": "automatic"
+          }
+        ]
     ]
 }
