@@ -3,12 +3,15 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: process.env.NODE_ENV || 'development',
-  entry: './public/assets/js/index.jsx',
+  entry: './client/index.jsx',
   plugins: [
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'views', 'index.ejs'),
     }),
   ],
+  resolve: {
+    extensions: ['.jsx', '.js'],
+  },
   module: {
     rules: [
       {
