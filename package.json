@@ -9,6 +9,7 @@
     "lint": "./node_modules/.bin/eslint lib server.js",
     "test": "./node_modules/.bin/jest",
     "react-app": "webpack --mode production",
+    "react-app:watch": "webpack --watch",
     "react-app:serve": "webpack serve"
   },
   "repository": {
@@ -43,12 +44,12 @@
     "@babel/preset-env": "^7.14.1",
     "@babel/preset-react": "^7.13.13",
     "babel-loader": "^8.2.2",
-    "eslint": "^7.12.0",
+    "eslint": "^7.25.0",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-jsx-a11y": "^6.3.1",
-    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.23.2",
     "eslint-plugin-react-hooks": "^4.2.0",
     "html-webpack-plugin": "^5.3.1",
     "jest": "^26.6.1",
@@ -60,7 +61,8 @@
   },
   "nodemonConfig": {
     "ignore": [
-      "dist"
+      "dist",
+      "client"
     ]
   }
 }
