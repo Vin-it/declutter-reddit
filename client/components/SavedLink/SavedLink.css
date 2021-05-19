@@ -1,0 +1,16 @@
+.SavedLink {
+    background-color: #f0f0ff;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    overflow: scroll;
+}
+
+.title {
+    margin-left: 25px;
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+}
