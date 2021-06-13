@@ -1,4 +1,7 @@
 import { useEffect, useState } from 'react';
+
+import SavedLink from './SavedLink/SavedLink';
+
 import { getLoggedInUser } from '../api/declutter-reddit-api';
 import { getSavedLinks } from '../api/reddit';
 
@@ -13,26 +16,15 @@ function Main() {
   useEffect(async () => {
     try {
       setIsLoading(true);
-      const { data } = await getLoggedInUser();
-      setUser(data.user);
+      const { data: userData } = await getLoggedInUser();
+      const { data: savedLinksRes } = await getSavedLinks(userData.user);
+      setUser(userData.user);
+      setSavedLinks(savedLinksRes);
       setIsLoading(false);
     } catch (err) {
       setError(err);
     }
   }, []);
-
-  useEffect(async () => {
-    if (user.username) {
-      try {
-        setIsLoading(true);
-        const { data } = await getSavedLinks(user);
-        setSavedLinks(data);
-        setIsLoading(false);
-      } catch (err) {
-        setError(err);
-      }
-    }
-  }, [user]);
 
   if (error) {
     return <div>Something went wrong!!</div>;
@@ -45,21 +37,21 @@ function Main() {
   return (
     <>
       <h1>{`Welcome, ${user.username}`}</h1>
-      <div>
-        {
-          savedLinks?.children.map((child) => (
-            <div key={child.data.id}>
-              <li>
-                {child.data.title}
-                <div>
-                  {(child?.data?.thumbnail !== 'self' && child?.data?.thumbnail !== 'default')
-                    ? <img src={child?.data?.thumbnail} alt="preview" />
-                    : null}
-                </div>
-              </li>
-            </div>
-          ))
-        }
+      <div style={{
+        display: 'flex',
+        flexDirection: 'column',
+        flexWrap: 'wrap',
+        justifyContent: 'space-between',
+        alignContent: 'center',
+      }}
+      >
+        {savedLinks?.children.map((child) => (
+          <SavedLink
+            key={child.data.id}
+            title={child.data.title}
+            thumbnail={child.data.thumbnail}
+          />
+        ))}
       </div>
     </>
   );
