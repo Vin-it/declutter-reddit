@@ -30,10 +30,12 @@ describe('lib/routes/auth/post-login', () => {
   };
   const fakeNext = jest.fn();
 
+  const userId = 'redditUserId';
   const username = 'fakeUsername';
   const accessToken = 'fakeAccessToken';
 
   const user = {
+    id: userId,
     username,
     access_token: accessToken,
   };
@@ -74,12 +76,14 @@ describe('lib/routes/auth/post-login', () => {
 
     expect(getUserByUsername).toHaveBeenCalledWith('fakeUsername');
     expect(fakeReq.session.user).toStrictEqual({
+      id: userId,
       username,
       accessToken,
       expiresOn,
     });
     expect(fakeRes.render).toHaveBeenCalledWith('index', {
       user: {
+        id: userId,
         username,
         accessToken,
         expiresOn,
@@ -149,6 +153,7 @@ describe('lib/routes/auth/post-login', () => {
     expect(updateAccessToken).toHaveBeenCalledWith(refreshedAT, expectedExpiry, username);
     expect(fakeReq.session).toStrictEqual({
       user: {
+        id: userId,
         accessToken: refreshedAT,
         username,
         expiresOn: expectedExpiry,
