@@ -33,11 +33,13 @@ describe('lib/routes/auth/post-login', () => {
   const userId = 'redditUserId';
   const username = 'fakeUsername';
   const accessToken = 'fakeAccessToken';
+  const isImported = 1;
 
   const user = {
     id: userId,
     username,
     access_token: accessToken,
+    isImported,
   };
 
   it('should throw an error if the user is not found in the database', async () => {
@@ -80,6 +82,7 @@ describe('lib/routes/auth/post-login', () => {
       username,
       accessToken,
       expiresOn,
+      isImported,
     });
     expect(fakeRes.render).toHaveBeenCalledWith('index', {
       user: {
@@ -87,6 +90,7 @@ describe('lib/routes/auth/post-login', () => {
         username,
         accessToken,
         expiresOn,
+        isImported,
       },
     });
   });
@@ -157,6 +161,7 @@ describe('lib/routes/auth/post-login', () => {
         accessToken: refreshedAT,
         username,
         expiresOn: expectedExpiry,
+        isImported,
       },
     });
   });
