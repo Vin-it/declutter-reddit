@@ -27,9 +27,16 @@ function Main() {
     }
   }, []);
 
+  const handlePrevious = async () => {
+    const firstPost = savedLinks.children[0];
+    const before = `${firstPost.kind}_${firstPost.id}`;
+    const { data: savedLinkRes } = await getSavedLinks(user, { before });
+    setSavedLinks(savedLinkRes);
+  };
+
   const handleNext = async () => {
     const { after } = savedLinks;
-    const { data: savedLinksRes } = await getSavedLinks(user, after);
+    const { data: savedLinksRes } = await getSavedLinks(user, { after });
     setSavedLinks(savedLinksRes);
   };
 
@@ -69,7 +76,7 @@ function Main() {
         justifyContent: 'space-between',
       }}
       >
-        <button type="button">Previous</button>
+        <button type="button" onClick={handlePrevious}>Previous</button>
         <button type="button" onClick={handleNext}>Next</button>
       </div>
     </>
