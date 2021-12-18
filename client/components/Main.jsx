@@ -4,6 +4,7 @@ import SavedLink from './SavedLink/SavedLink';
 
 import { getLoggedInUser } from '../api/declutter-reddit-api';
 import { getSavedLinks } from '../api/reddit';
+import { REDDIT_LISTING_KIND } from '../constants/app';
 
 function Main() {
   const [user, setUser] = useState({
@@ -48,7 +49,11 @@ function Main() {
         {savedLinks?.children.map((child) => (
           <SavedLink
             key={child.data.id}
-            title={child.data.title}
+            title={
+              child.kind === REDDIT_LISTING_KIND.T1
+                ? child.data.link_title
+                : child.data.title
+            }
             thumbnail={child.data.thumbnail}
           />
         ))}
