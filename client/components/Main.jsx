@@ -27,6 +27,12 @@ function Main() {
     }
   }, []);
 
+  const handleNext = async () => {
+    const { after } = savedLinks;
+    const { data: savedLinksRes } = await getSavedLinks(user, after);
+    setSavedLinks(savedLinksRes);
+  };
+
   if (error) {
     return <div>Something went wrong!!</div>;
   }
@@ -64,7 +70,7 @@ function Main() {
       }}
       >
         <button type="button">Previous</button>
-        <button type="button">Next</button>
+        <button type="button" onClick={handleNext}>Next</button>
       </div>
     </>
   );

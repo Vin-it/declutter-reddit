@@ -3,9 +3,9 @@ import {
 } from '../constants/urls';
 
 /* eslint-disable import/prefer-default-export */
-export const getSavedLinks = async (user) => {
+export const getSavedLinks = async (user, after) => {
   try {
-    const response = await fetch(`${REDDIT_API_BASE_URL}/user/${user.username}/saved`, {
+    const response = await fetch(`${REDDIT_API_BASE_URL}/user/${user.username}/saved?after=${after}`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${user.accessToken}`,
