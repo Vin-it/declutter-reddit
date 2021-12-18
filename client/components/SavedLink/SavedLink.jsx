@@ -6,7 +6,7 @@ function SavedLink({ title, thumbnail }) {
   return (
     <div className="SavedLink">
       <div className="img">
-        {thumbnail && thumbnail !== 'self' && thumbnail !== 'default' ? (
+        {thumbnail && thumbnail.indexOf('http') > -1 ? (
           <img src={thumbnail} alt="preview" />
         ) : null}
       </div>
