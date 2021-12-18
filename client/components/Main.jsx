@@ -58,6 +58,14 @@ function Main() {
           />
         ))}
       </div>
+      <div style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+      }}
+      >
+        <button type="button">Previous</button>
+        <button type="button">Next</button>
+      </div>
     </>
   );
 }
