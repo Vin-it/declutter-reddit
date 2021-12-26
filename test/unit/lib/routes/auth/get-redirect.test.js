@@ -4,10 +4,10 @@ jest.mock('../../../../../lib/utils/debug');
 jest.mock('../../../../../lib/utils/date');
 jest.mock('../../../../../lib/queries/users');
 
-const { insertorUpdateUser } = require('../../../../../lib/queries/users');
+const { updateUser, getUserByUsername } = require('../../../../../lib/queries/users');
 const { exchangeCodeForTokensReq, getUserInfo } = require('../../../../../lib/services/reddit');
 const { calcExpiresOn } = require('../../../../../lib/utils/date');
-const { logDatabase, logRequest } = require('../../../../../lib/utils/debug');
+const { logRequest } = require('../../../../../lib/utils/debug');
 
 const getRedirect = require('../../../../../lib/routes/auth/get-redirect');
 
@@ -31,17 +31,24 @@ describe('lib/routes/auth/get-redirect', () => {
     jest.clearAllMocks();
   });
 
-  it('should call redirect method', async () => {
+  it('should call redirect method when user already exists', async () => {
     const expectedDate = new Date();
+    const tokenData = {
+      access_token: 'accessToken',
+      refresh_token: 'refreshToken',
+      expires_in: 3600,
+    };
+    const user = {
+      id: '1',
+      name: 'username',
+      ...tokenData,
+    };
 
     exchangeCodeForTokensReq.mockResolvedValueOnce({
-      data: {
-        access_token: 'accessToken',
-        refresh_token: 'refreshToken',
-        expires_in: 3600,
-      },
+      data: tokenData,
     });
-    insertorUpdateUser.mockResolvedValueOnce(1);
+    getUserByUsername.mockResolvedValue([user]);
+    updateUser.mockResolvedValueOnce(1);
     getUserInfo.mockResolvedValueOnce({
       data: { name: 'fakeUsername' },
     });
