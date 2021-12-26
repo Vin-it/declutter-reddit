@@ -24,13 +24,14 @@ describe('lib/routes/auth/get-redirect', () => {
     json: jest.fn(),
     send: jest.fn(),
     render: jest.fn(),
+    redirect: jest.fn(),
   };
 
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
-  it('should call render method', async () => {
+  it('should call redirect method', async () => {
     const expectedDate = new Date();
 
     exchangeCodeForTokensReq.mockResolvedValueOnce({
@@ -51,15 +52,7 @@ describe('lib/routes/auth/get-redirect', () => {
     expect(exchangeCodeForTokensReq).toHaveBeenCalledWith('fakeCode');
     expect(calcExpiresOn).toHaveBeenCalledWith(3600);
     expect(getUserInfo).toHaveBeenCalledWith('accessToken');
-    expect(logDatabase).not.toHaveBeenCalled();
-    expect(fakeRes.render).toHaveBeenCalledWith('index', {
-      user: {
-        accessToken: 'accessToken',
-        expiresOn: expectedDate,
-        refreshToken: 'refreshToken',
-        username: 'fakeUsername',
-      },
-    });
+    expect(fakeRes.redirect).toHaveBeenCalledWith('/');
   });
 
   it('should catch an error, log it, and respond with 400 status code', async () => {
