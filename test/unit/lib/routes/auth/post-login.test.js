@@ -154,7 +154,9 @@ describe('lib/routes/auth/post-login', () => {
 
     expect(getUserByUsername).toHaveBeenCalledWith(username);
     expect(refreshAccessToken).toHaveBeenCalledWith(user);
-    expect(updateUser).toHaveBeenCalledWith(refreshedAT, expectedExpiry, username);
+    expect(updateUser).toHaveBeenCalledWith(
+      { access_token: refreshedAT, expires_on: expectedExpiry }, { username },
+    );
     expect(fakeReq.session).toStrictEqual({
       user: {
         id: userId,
