@@ -4,7 +4,7 @@ jest.mock('../../../../../lib/utils/debug');
 jest.mock('../../../../../lib/utils/date');
 jest.mock('../../../../../lib/queries/users');
 
-const { insertUserIfNotExist } = require('../../../../../lib/queries/users');
+const { insertorUpdateUser } = require('../../../../../lib/queries/users');
 const { exchangeCodeForTokensReq, getUserInfo } = require('../../../../../lib/services/reddit');
 const { calcExpiresOn } = require('../../../../../lib/utils/date');
 const { logDatabase, logRequest } = require('../../../../../lib/utils/debug');
@@ -41,7 +41,7 @@ describe('lib/routes/auth/get-redirect', () => {
         expires_in: 3600,
       },
     });
-    insertUserIfNotExist.mockResolvedValueOnce(1);
+    insertorUpdateUser.mockResolvedValueOnce(1);
     getUserInfo.mockResolvedValueOnce({
       data: { name: 'fakeUsername' },
     });
