@@ -31,6 +31,8 @@ describe('lib/routes/auth/get-redirect', () => {
     jest.clearAllMocks();
   });
 
+  // TODO: should call redirect method when user does not already exist
+
   it('should call redirect method when user already exists', async () => {
     const expectedDate = new Date();
     const tokenData = {
