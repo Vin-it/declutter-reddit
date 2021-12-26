@@ -5,7 +5,7 @@ jest.mock('../../../../../lib/utils/debug');
 jest.mock('../../../../../lib/queries/users');
 jest.mock('../../../../../lib/utils/date');
 
-const { getUserByUsername, updateAccessToken } = require('../../../../../lib/queries/users');
+const { getUserByUsername, updateUser } = require('../../../../../lib/queries/users');
 const postLogin = require('../../../../../lib/routes/auth/post-login');
 const { refreshAccessToken } = require('../../../../../lib/services/reddit');
 const { calcExpiresOn } = require('../../../../../lib/utils/date');
@@ -109,7 +109,7 @@ describe('lib/routes/auth/post-login', () => {
         access_token: refreshedAT,
       },
     });
-    updateAccessToken.mockResolvedValueOnce(0);
+    updateUser.mockResolvedValueOnce(0);
 
     const {
       INSERT_FAIL,
@@ -147,14 +147,14 @@ describe('lib/routes/auth/post-login', () => {
         access_token: refreshedAT,
       },
     });
-    updateAccessToken.mockResolvedValueOnce(1);
+    updateUser.mockResolvedValueOnce(1);
     calcExpiresOn.mockReturnValueOnce(expectedExpiry);
 
     await postLogin(fakeReq, fakeRes);
 
     expect(getUserByUsername).toHaveBeenCalledWith(username);
     expect(refreshAccessToken).toHaveBeenCalledWith(user);
-    expect(updateAccessToken).toHaveBeenCalledWith(refreshedAT, expectedExpiry, username);
+    expect(updateUser).toHaveBeenCalledWith(refreshedAT, expectedExpiry, username);
     expect(fakeReq.session).toStrictEqual({
       user: {
         id: userId,
