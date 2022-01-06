@@ -15,9 +15,10 @@ services:
             - DB_HOST=db-reddit
             - DEBUG=debug*
             - NODE_ENV=development
+            - DECLUTTER_ENV=local
         tty: true
     db-reddit:
-        image: mysql
+        image: mariadb
         command: --default-authentication-plugin=mysql_native_password
         ports:
             - "3306:3306"
