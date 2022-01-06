@@ -4,10 +4,10 @@ jest.mock('../../../../../lib/utils/debug');
 jest.mock('../../../../../lib/utils/date');
 jest.mock('../../../../../lib/queries/users');
 
-const { insertUserIfNotExist } = require('../../../../../lib/queries/users');
+const { updateUser, getUserByUsername } = require('../../../../../lib/queries/users');
 const { exchangeCodeForTokensReq, getUserInfo } = require('../../../../../lib/services/reddit');
 const { calcExpiresOn } = require('../../../../../lib/utils/date');
-const { logDatabase, logRequest } = require('../../../../../lib/utils/debug');
+const { logRequest } = require('../../../../../lib/utils/debug');
 
 const getRedirect = require('../../../../../lib/routes/auth/get-redirect');
 
@@ -24,23 +24,33 @@ describe('lib/routes/auth/get-redirect', () => {
     json: jest.fn(),
     send: jest.fn(),
     render: jest.fn(),
+    redirect: jest.fn(),
   };
 
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
-  it('should call render method', async () => {
+  // TODO: should call redirect method when user does not already exist
+
+  it('should call redirect method when user already exists', async () => {
     const expectedDate = new Date();
+    const tokenData = {
+      access_token: 'accessToken',
+      refresh_token: 'refreshToken',
+      expires_in: 3600,
+    };
+    const user = {
+      id: '1',
+      name: 'username',
+      ...tokenData,
+    };
 
     exchangeCodeForTokensReq.mockResolvedValueOnce({
-      data: {
-        access_token: 'accessToken',
-        refresh_token: 'refreshToken',
-        expires_in: 3600,
-      },
+      data: tokenData,
     });
-    insertUserIfNotExist.mockResolvedValueOnce(1);
+    getUserByUsername.mockResolvedValue([user]);
+    updateUser.mockResolvedValueOnce(1);
     getUserInfo.mockResolvedValueOnce({
       data: { name: 'fakeUsername' },
     });
@@ -51,15 +61,7 @@ describe('lib/routes/auth/get-redirect', () => {
     expect(exchangeCodeForTokensReq).toHaveBeenCalledWith('fakeCode');
     expect(calcExpiresOn).toHaveBeenCalledWith(3600);
     expect(getUserInfo).toHaveBeenCalledWith('accessToken');
-    expect(logDatabase).not.toHaveBeenCalled();
-    expect(fakeRes.render).toHaveBeenCalledWith('index', {
-      user: {
-        accessToken: 'accessToken',
-        expiresOn: expectedDate,
-        refreshToken: 'refreshToken',
-        username: 'fakeUsername',
-      },
-    });
+    expect(fakeRes.redirect).toHaveBeenCalledWith('/');
   });
 
   it('should catch an error, log it, and respond with 400 status code', async () => {
