@@ -29,7 +29,7 @@ function Main() {
 
   const handlePrevious = async () => {
     const firstPost = savedLinks.children[0];
-    const before = `${firstPost.kind}_${firstPost.id}`;
+    const before = `${firstPost.kind}_${firstPost.data.id}`;
     const { data: savedLinkRes } = await getSavedLinks(user, { before });
     setSavedLinks(savedLinkRes);
   };
