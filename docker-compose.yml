@@ -15,6 +15,7 @@ services:
             - DB_HOST=db-reddit
             - DEBUG=debug*
             - NODE_ENV=development
+            - DECLUTTER_ENV=local
         tty: true
     db-reddit:
         image: mysql
