@@ -1,5 +1,5 @@
 container:
-  image: node:14
+  image: node:16
 test_task:
   node_modules_cache:
     folder: node_modules
