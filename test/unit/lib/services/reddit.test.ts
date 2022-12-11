@@ -1,24 +1,25 @@
-jest.mock('axios');
 jest.mock('config');
 jest.mock('../../../../lib/utils/debug');
 
-const axios = require('axios');
+import axios from 'axios';
 
-const {
-  exchangeCodeForTokensReq,
-  getUserInfo,
-} = require('../../../../lib/services/reddit');
-const { logRequest } = require('../../../../lib/utils/debug');
-const { RedditRequestError } = require('../../../../lib/utils/error-types');
+import { exchangeCodeForTokensReq, getUserInfo } from '../../../../lib/services/reddit';
+import * as utilsDebug from '../../../../lib/utils/debug';
+import { RedditRequestError } from '../../../../lib/utils/error-types';
 
-const { config } = require('../../__mocks__/config');
+import config from '../../__mocks__/config';
+
+
+const mockedAxiosPost = jest.spyOn(axios, 'post');
+const mockedAxiosGet = jest.spyOn(axios, 'get');
+const mockedLogRequest = jest.spyOn(utilsDebug, 'logRequest');
 
 describe('lib/services/reddit', () => {
-  beforeEach(() => jest.clearAllMocks());
 
   const { REDDIT_REQUEST_ERR_MESSAGE } = config.errors;
 
   describe('exchangeCodeForTokensReq()', () => {
+    beforeEach(() => jest.clearAllMocks());
     it('should call axios.post with appropriate arguments', async () => {
       const {
         GRANT_TYPE_AUTH_CODE,
@@ -34,7 +35,7 @@ describe('lib/services/reddit', () => {
         redirect_uri: REDIRECT_URI,
       });
 
-      axios.post.mockResolvedValueOnce({ success: true });
+      mockedAxiosPost.mockResolvedValueOnce({ success: true });
 
       const response = await exchangeCodeForTokensReq(code);
 
@@ -58,25 +59,26 @@ describe('lib/services/reddit', () => {
 
     it('should log error message then throw an instance of RedditRequestError on rejection', async () => {
       const code = 'fake-authorization-code';
-      axios.post.mockRejectedValueOnce(new Error('Mock exchangeCodeForTokensReq Error'));
+      mockedAxiosPost.mockRejectedValueOnce(new Error('Mock exchangeCodeForTokensReq Error'));
 
       try {
         await exchangeCodeForTokensReq(code);
-      } catch (error) {
-        expect(logRequest).toHaveBeenCalledWith(
+      } catch (error: unknown) {
+        expect(mockedLogRequest).toHaveBeenCalledWith(
           'Error while exchaning code for token',
           'Mock exchangeCodeForTokensReq Error',
         );
         expect(error instanceof RedditRequestError).toBe(true);
-        expect(error.message).toEqual(REDDIT_REQUEST_ERR_MESSAGE);
+        expect((error as any).message).toEqual(REDDIT_REQUEST_ERR_MESSAGE);
       }
     });
   });
 
   describe('getUserInfo()', () => {
+    beforeEach(() => jest.clearAllMocks());
     const accessToken = 'fake-access-token';
     it('should call axios.get with appropriate arguments', async () => {
-      axios.get.mockResolvedValueOnce({ success: true });
+      mockedAxiosGet.mockResolvedValueOnce({ success: true });
 
       const { REDDIT_API_BASE_URL } = config.reddit;
 
@@ -96,16 +98,16 @@ describe('lib/services/reddit', () => {
     });
 
     it('should throw an instance of RedditRequestError on failure', async () => {
-      axios.get.mockRejectedValueOnce(new Error('Mock getUserInfo Error'));
+      mockedAxiosGet.mockRejectedValueOnce(new Error('Mock getUserInfo Error'));
       try {
         await getUserInfo(accessToken);
       } catch (error) {
-        expect(logRequest).toHaveBeenCalledWith(
+        expect(mockedLogRequest).toHaveBeenCalledWith(
           'Error while making a request to get user info from reddit',
           'Mock getUserInfo Error',
         );
         expect(error instanceof RedditRequestError).toBe(true);
-        expect(error.message).toEqual(REDDIT_REQUEST_ERR_MESSAGE);
+        expect((error as any).message).toEqual(REDDIT_REQUEST_ERR_MESSAGE);
       }
     });
   });

@@ -6,6 +6,7 @@ import { RedditRequestError } from '../utils/error-types';
 import oauth from '../constants/oauth';
 import reddit from '../constants/reddit';
 import errors from '../constants/errors';
+import { response } from 'express';
 
 const {
   CLIENT_ID,
@@ -33,7 +34,7 @@ async function exchangeCodeForTokensReq(code: string): Promise<AxiosResponse<Tok
   });
 
   try {
-    return axios.post(
+    const res = await axios.post(
       REDDIT_OAUTH_TOKEN_URL,
       body,
       {
@@ -46,6 +47,7 @@ async function exchangeCodeForTokensReq(code: string): Promise<AxiosResponse<Tok
         },
       },
     );
+    return res;
   } catch (error: unknown) {
     if (error instanceof Error) {
       logRequest('Error while exchaning code for token', error.message);
@@ -56,11 +58,12 @@ async function exchangeCodeForTokensReq(code: string): Promise<AxiosResponse<Tok
 
 async function getUserInfo(accessToken: string) {
   try {
-    return await axios.get(`${REDDIT_API_BASE_URL}/api/v1/me`, {
+    const response = await axios.get(`${REDDIT_API_BASE_URL}/api/v1/me`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
     });
+    return response;
   } catch (error) {
     if (error instanceof Error) {
       logRequest('Error while making a request to get user info from reddit', error.message);

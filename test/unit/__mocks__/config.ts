@@ -1,22 +1,25 @@
-const _ = require('lodash');
+import _ from 'lodash';
 
-const constants = require('../../../config/default');
+import  { errors, oauth, reddit } from '../../../config/default';
 
 const config = {
-  ...constants,
   oauth: {
-    ...constants.oauth,
+    ...oauth,
     CLIENT_ID: 'fake-client-id',
     CLIENT_SECRET: 'fake-client-secret',
     REDIRECT_URI: 'fake-redirect-url',
     REDDIT_OAUTH_TOKEN_URL: 'fake-oauth-token-url',
   },
   reddit: {
-    ...constants.reddit,
+    ...reddit,
     REDDIT_API_BASE_URL: 'https://fake-reddit-api-url.com',
   },
+  errors,
 };
-module.exports = {
-  get: (path) => (_.get(config, path)),
-  config,
-};
+
+const get = (path: string) => (_.get(config, path));
+export default { 
+  ...config,
+  get
+}
+
