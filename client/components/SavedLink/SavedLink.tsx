@@ -1,8 +1,11 @@
-import PropTypes from 'prop-types';
-
 import './SavedLink.css';
 
-function SavedLink({ title, thumbnail }) {
+interface SavedLinkProps {
+  title: string;
+  thumbnail: string;
+}
+
+function SavedLink({ title, thumbnail }: SavedLinkProps) {
   return (
     <div className="SavedLink">
       <div className="img">
@@ -16,10 +19,5 @@ function SavedLink({ title, thumbnail }) {
     </div>
   );
 }
-
-SavedLink.propTypes = {
-  title: PropTypes.string.isRequired,
-  thumbnail: PropTypes.string.isRequired,
-};
 
 export default SavedLink;

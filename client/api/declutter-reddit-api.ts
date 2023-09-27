@@ -12,7 +12,10 @@ export const getLoggedInUser = async () => {
     }
 
     throw new Error(`getLoggedInUser, Request failed with ${response.status}`);
-  } catch (error) {
-    throw new Error(`getLoggedInUser error ${error.message}`);
+  } catch (error: unknown) {
+    if (typeof error === 'object' &&  error !== null && 'message' in error) {
+      throw new Error(`getLoggedInUser error ${error.message}`);
+    }
+    
   }
 };
