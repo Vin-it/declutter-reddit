@@ -7,7 +7,10 @@ const { DECLUTTER_ENV, ENV_DEFAULT } = config.get('app');
 
 module.exports = {
   mode: process.env.NODE_ENV || 'development',
-  entry: './client/index.jsx',
+  entry: './client/index.tsx',
+  output: {
+    path: path.resolve(__dirname, 'build'),
+  },
   plugins: [
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'views', 'index.ejs'),
@@ -17,14 +20,14 @@ module.exports = {
     }),
   ],
   resolve: {
-    extensions: ['.jsx', '.js'],
+    extensions: ['.tsx', '.ts', '.jsx', '.js'],
   },
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(ts|tsx)$/,
         exclude: /node_modules/,
-        use: ['babel-loader'],
+        use: ['ts-loader'],
       },
       {
         test: /\.(css|scss)$/,

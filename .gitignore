@@ -105,3 +105,5 @@ dist
 
 # IDE Specific config
 .vscode
+
+build
