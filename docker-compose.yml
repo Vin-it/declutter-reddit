@@ -18,13 +18,12 @@ services:
             - DECLUTTER_ENV=local
         tty: true
     db-reddit:
-        image: mysql
-        command: --default-authentication-plugin=mysql_native_password
+        image: postgres:14-alpine
         ports:
-            - "3306:3306"
+            - 5432:5432
+        volumes:
+            - ~/apps/postgres:/var/lib/postgresql/data
         environment:
-            - MYSQL_ROOT_PASSWORD=password
-            - MYSQL_USER=reddit_user
-            - MYSQL_PASSWORD=password
-            - MYSQL_DATABASE=reddit
-            - TZ=UTC
+            - POSTGRES_PASSWORD=postgres
+            - POSTGRES_USER=postgres
+            - POSTGRES_DB=postgres
