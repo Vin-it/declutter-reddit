@@ -2,7 +2,7 @@ import Connection from 'mysql2/typings/mysql/lib/Connection';
 import { DB_HOST, DB_NAME, DB_URL } from '../constants/database';
 
 const nonLocalConnection = {
-  client: 'mysql2',
+  client: 'pg',
   connection: DB_URL,
   pool: {
     min: 2,
@@ -15,19 +15,16 @@ const nonLocalConnection = {
 
 export default {
   local: {
-    client: 'mysql2',
+    client: 'pg',
     connection: {
       host: DB_HOST,
       database: DB_NAME,
-      user: 'root',
-      password: 'password',
+      user: 'postgres',
+      password: 'postgres',
     },
     pool: {
-      afterCreate(connection: Connection, callback: Function) {
-        connection.query("SET time_zone = 'UTC';", (err: unknown) => {
-          callback(err, connection);
-        });
-      },
+      min: 1,
+      max: 1,
     },
     migrations: {
       tableName: 'knex_migrations',
@@ -37,5 +34,4 @@ export default {
   development: nonLocalConnection,
   staging: nonLocalConnection,
   production: nonLocalConnection,
-
 };
