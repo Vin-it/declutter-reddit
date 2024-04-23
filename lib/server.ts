@@ -46,7 +46,7 @@ function initMiddlewares(app: Express) {
   app.use(errorHandler);
 }
 
-async function initMigrations(knex: Knex, retryCount: number) {
+async function initMigrations(knex: ReturnType<typeof Knex>, retryCount: number) {
   if (retryCount === 3) {
     throw Error("Failed to run migrations after 3 retries");
   }
