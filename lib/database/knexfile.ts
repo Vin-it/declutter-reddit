@@ -1,4 +1,3 @@
-import Connection from 'mysql2/typings/mysql/lib/Connection';
 import { DB_HOST, DB_NAME, DB_URL } from '../constants/database';
 
 const nonLocalConnection = {
