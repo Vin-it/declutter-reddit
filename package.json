@@ -8,6 +8,7 @@
     "compile": "tsc",
     "start": "npm run compile && node dist/declutter-reddit.js",
     "start:local": "npm run compile && nodemon declutter-reddit.ts",
+    "migrate": "knex migrate:make --knexfile ./lib/database/knexfile.ts",
     "lint": "./node_modules/.bin/eslint lib server.js",
     "test": "./node_modules/.bin/jest --config=test/unit/jest.config.js",
     "react-app": "webpack --mode production",
