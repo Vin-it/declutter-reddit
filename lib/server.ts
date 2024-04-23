@@ -1,3 +1,4 @@
+import 'dotenv/config'
 import config from "config";
 import express, { type Express } from "express";
 import connectSessionKnex from "connect-session-knex";
