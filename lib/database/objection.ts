@@ -8,10 +8,8 @@ import { Model } from 'objection';
  * Takes instance of knex and initializes objection's Model
  * @param {Knex} knex
  */
-function init(knex: Knex) {
+function init(knex: ReturnType<typeof Knex>) {
   Model.knex(knex);
 }
 
-export {
-  init,
-};
+export { init };
