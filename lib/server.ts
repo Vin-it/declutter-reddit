@@ -41,8 +41,8 @@ function initMiddlewares(app: Express) {
       cookie: { secure: false },
     })
   );
-  app.use("/static", express.static(path.join(__dirname, "../public")));
-  app.use("/static", express.static(path.join(__dirname, "../build")));
+  app.use("/static", express.static(path.join(__dirname, process.env.DECLUTTER_ENV === 'local' ? "../public" : "../../public")));
+  app.use("/static", express.static(path.join(__dirname, process.env.DECLUTTER_ENV === 'local' ? '../build' : '../../build')));
   app.use(router);
   app.use(errorHandler);
 }
