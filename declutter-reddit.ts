@@ -1,2 +1,2 @@
-import initApp from './lib/server';
-initApp();
+import initApp from './lib/server'
+initApp()

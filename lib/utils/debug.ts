@@ -1,33 +1,33 @@
-import debug, { Debugger } from 'debug';
+import debug, { type Debugger } from 'debug'
 
-let loggers: { debugServer: Debugger; debugRequest: Debugger; debugDatabase: Debugger; };
+let loggers: { debugServer: Debugger, debugRequest: Debugger, debugDatabase: Debugger }
 
-function init() {
-  const debugServer = debug('debug:server');
-  const debugRequest = debug('debug:request-error');
-  const debugDatabase = debug('debug:database');
+function init () {
+  const debugServer = debug('debug:server')
+  const debugRequest = debug('debug:request-error')
+  const debugDatabase = debug('debug:database')
 
   loggers = {
     debugServer,
     debugRequest,
-    debugDatabase,
-  };
+    debugDatabase
+  }
 }
 
-function getLogger(name: keyof typeof loggers) {
-  return loggers[name];
+function getLogger (name: keyof typeof loggers) {
+  return loggers[name]
 }
 
-function logServer(...message: string[]) {
-  loggers.debugServer('', ...message);
+function logServer (...message: string[]) {
+  loggers.debugServer('', ...message)
 }
 
-function logDatabase(...message: string[]) {
-  loggers.debugDatabase('', ...message);
+function logDatabase (...message: string[]) {
+  loggers.debugDatabase('', ...message)
 }
 
-function logRequest(...message: string[]) {
-  loggers.debugRequest('', ...message);
+function logRequest (...message: string[]) {
+  loggers.debugRequest('', ...message)
 }
 
 export {
@@ -35,5 +35,5 @@ export {
   getLogger,
   logServer,
   logDatabase,
-  logRequest,
-};
+  logRequest
+}

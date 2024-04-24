@@ -1,5 +1,5 @@
-import Knex from 'knex';
-import { Model } from 'objection';
+import type Knex from 'knex'
+import { Model } from 'objection'
 /**
  * Objection Model does not require an instance to be created
  * Read more here -
@@ -8,8 +8,8 @@ import { Model } from 'objection';
  * Takes instance of knex and initializes objection's Model
  * @param {Knex} knex
  */
-function init(knex: ReturnType<typeof Knex>) {
-  Model.knex(knex);
+function init (knex: ReturnType<typeof Knex>) {
+  Model.knex(knex)
 }
 
-export { init };
+export { init }
