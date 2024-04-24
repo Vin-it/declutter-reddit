@@ -4,9 +4,9 @@
   "description": "App to search/export saved or hidden Reddit links",
   "main": "declutter-reddit.js",
   "scripts": {
-    "heroku-prebuild": "npm install --also=dev && npm run react-app",
+    "deploy": "npm install && npm run compile && npm run react-app:build",
     "compile": "tsc --project tsconfig.be.json",
-    "start": "npm run compile && node dist/declutter-reddit.js",
+    "start": "node dist/declutter-reddit.js",
     "start:local": "npm run compile && nodemon declutter-reddit.ts",
     "migrate": "knex migrate:make --knexfile ./lib/database/knexfile.ts",
     "lint:be": "eslint ./lib/**/*.ts declutter-reddit.ts",
