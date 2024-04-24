@@ -5,7 +5,7 @@
   "main": "declutter-reddit.js",
   "scripts": {
     "heroku-prebuild": "npm install --also=dev && npm run react-app",
-    "compile": "tsc",
+    "compile": "tsc --project tsconfig.be.json",
     "start": "npm run compile && node dist/declutter-reddit.js",
     "start:local": "npm run compile && nodemon declutter-reddit.ts",
     "migrate": "knex migrate:make --knexfile ./lib/database/knexfile.ts",
@@ -14,7 +14,8 @@
     "test": "./node_modules/.bin/jest --config=test/unit/jest.config.js",
     "react-app": "webpack --mode production",
     "react-app:watch": "webpack --watch",
-    "react-app:serve": "webpack serve"
+    "react-app:serve": "webpack serve",
+    "react-app:build": "webpack build"
   },
   "repository": {
     "type": "git",
@@ -55,7 +56,6 @@
     "@types/express-session": "^1.17.5",
     "@types/jest": "^29.2.4",
     "@types/lodash": "^4.14.191",
-    "@types/mocha": "^10.0.1",
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.9",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
@@ -74,7 +74,7 @@
     "nodemon": "3.1.0",
     "style-loader": "^2.0.0",
     "ts-jest": "^29.0.3",
-    "ts-loader": "^9.4.2",
+    "ts-loader": "9.5.1",
     "ts-node": "^10.9.1",
     "typescript": "^4.9.5",
     "webpack": "5.91.0",
