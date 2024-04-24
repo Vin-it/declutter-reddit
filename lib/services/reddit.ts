@@ -1,6 +1,6 @@
 import axios, { type AxiosResponse } from 'axios'
 import config from 'config'
-
+import { URLSearchParams } from 'node:url';
 import { logRequest } from '../utils/debug'
 import { RedditRequestError } from '../utils/error-types'
 import type oauth from '../constants/oauth'
