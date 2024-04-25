@@ -2,12 +2,12 @@ import { DB_HOST, DB_NAME, DB_PASS, DB_URL, DB_USER } from '../constants/databas
 
 const nonLocalConnection = {
   client: 'pg',
-  connection: DB_URL === '' ? DB_URL : {
+  connection: !DB_URL ? {
     host: DB_HOST,
     database: DB_NAME,
     user: DB_USER,
     password: DB_PASS,
-  },
+  } :  DB_URL,
   pool: {
     min: 2,
     max: 10
