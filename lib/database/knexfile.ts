@@ -1,8 +1,13 @@
-import { DB_HOST, DB_NAME, DB_URL } from '../constants/database'
+import { DB_HOST, DB_NAME, DB_PASS, DB_URL, DB_USER } from '../constants/database'
 
 const nonLocalConnection = {
   client: 'pg',
-  connection: DB_URL,
+  connection: DB_URL === '' ? DB_URL : {
+    host: DB_HOST,
+    database: DB_NAME,
+    user: DB_USER,
+    password: DB_PASS,
+  },
   pool: {
     min: 2,
     max: 10
@@ -18,8 +23,8 @@ export default {
     connection: {
       host: DB_HOST,
       database: DB_NAME,
-      user: 'postgres',
-      password: 'postgres'
+      user: DB_USER,
+      password: DB_PASS,
     },
     pool: {
       min: 1,
