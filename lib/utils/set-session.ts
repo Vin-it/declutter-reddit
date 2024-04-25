@@ -1,8 +1,8 @@
-import { Request } from "express";
+import { type Request } from 'express'
 
-function setSession(
+function setSession (
   req: Request,
-  user: { username: string; isImported: boolean; id: number },
+  user: { username: string, isImported: boolean, id: number },
   accessToken: string,
   expiresOn: Date | string
 ) {
@@ -12,9 +12,9 @@ function setSession(
       username: user.username,
       isImported: user.isImported,
       accessToken,
-      expiresOn,
-    };
+      expiresOn
+    }
   }
 }
 
-export { setSession };
+export { setSession }

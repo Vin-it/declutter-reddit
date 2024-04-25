@@ -1,20 +1,20 @@
-import config from 'config';
+import config from 'config'
 
-const { SERVER_ERROR } = config.get<{ SERVER_ERROR: any }>('errors.codes');
+const { SERVER_ERROR } = config.get<{ SERVER_ERROR: any }>('errors.codes')
 
-function makeError(errorObject = {
+function makeError (errorObject = {
   message: 'Something went wrong!',
   status: 500,
   expose: false,
-  code: SERVER_ERROR,
+  code: SERVER_ERROR
 }) {
-  let error = new Error(errorObject.message);
+  let error = new Error(errorObject.message)
   error = {
     ...error,
-    ...errorObject,
-  };
+    ...errorObject
+  }
 
-  return error;
+  return error
 }
 
-export default makeError;
+export default makeError

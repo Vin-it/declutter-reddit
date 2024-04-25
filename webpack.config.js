@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const config = require('config');
+const { options } = require('pg/lib/defaults');
 
 const { DECLUTTER_ENV, ENV_DEFAULT } = config.get('app');
 
@@ -27,7 +28,10 @@ module.exports = {
       {
         test: /\.(ts|tsx)$/,
         exclude: /node_modules/,
-        use: ['ts-loader'],
+        use: [{
+          loader: 'ts-loader',
+          options: { configFile: 'tsconfig.fe.json' },
+        }]
       },
       {
         test: /\.(css|scss)$/,
