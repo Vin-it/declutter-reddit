@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom';
 
-import Main from './components/Main';
+import { DeclutterRouter } from './DeclutterRouter';
 
-ReactDOM.render(<Main />, document.getElementById('root'));
+ReactDOM.render(<DeclutterRouter />, document.getElementById('root'));

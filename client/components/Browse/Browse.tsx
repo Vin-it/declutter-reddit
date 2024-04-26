@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react';
 
-import SavedLink from './SavedLink/SavedLink';
+import SavedLink from '../SavedLink/SavedLink';
 
-import { getLoggedInUser } from '../api/declutter-reddit-api';
-import { getSavedLinks } from '../api/reddit';
-import { REDDIT_LISTING_KIND } from '../constants/app';
-import { SavedLinks } from '../utils/reddit-interfaces';
+import { getLoggedInUser } from '../../api/declutter-reddit-api';
+import { getSavedLinks } from '../../api/reddit';
+import { SavedLinks } from '../../utils/reddit-interfaces';
 
-function Main() {
+function Browse() {
   const [user, setUser] = useState({
     username: '',
   });
@@ -86,4 +85,4 @@ function Main() {
   );
 }
 
-export default Main;
+export default Browse;
