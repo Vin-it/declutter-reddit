@@ -1,16 +1,21 @@
 .SavedLink {
-    background-color: #f0f0ff;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    overflow: scroll;
+  background-color: #fff;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  overflow: scroll;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 .title {
-    margin-left: 25px;
-    display: flex;
-    flex-direction: column; 
-    justify-content: center;
+  margin-left: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.subreddit {
+  color: gray;
 }

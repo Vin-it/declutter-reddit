@@ -10,6 +10,7 @@ function SavedLink({ data }: SavedLinkProps) {
     <div className="SavedLink">
       <div className="img">{renderImage(data)}</div>
       <div className="title">
+        <div className="subreddit">{data.subreddit_name_prefixed}</div>
         <div>{data.title}</div>
       </div>
     </div>
