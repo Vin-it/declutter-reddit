@@ -5,22 +5,7 @@ import SavedLink from './SavedLink/SavedLink';
 import { getLoggedInUser } from '../api/declutter-reddit-api';
 import { getSavedLinks } from '../api/reddit';
 import { REDDIT_LISTING_KIND } from '../constants/app';
-import { string } from 'prop-types';
-
-interface SavedLinks {
-  children: {
-    kind: string;
-    data: {
-      id: string;
-      link: string;
-      link_title: string;
-      title: string;
-      thumbnail: string;
-    };
-  }[];
-  after: string;
-  before: string;
-}
+import { SavedLinks } from '../utils/reddit-interfaces';
 
 function Main() {
   const [user, setUser] = useState({
@@ -81,15 +66,7 @@ function Main() {
         }}
       >
         {savedLinks?.children.map((child) => (
-          <SavedLink
-            key={child.data.id}
-            title={
-              child.kind === REDDIT_LISTING_KIND.T1
-                ? child.data.link_title
-                : child.data.title
-            }
-            thumbnail={child.data.thumbnail}
-          />
+          <SavedLink data={child.data} key={child.data.id} />
         ))}
       </div>
       <div
