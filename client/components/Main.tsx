@@ -55,7 +55,7 @@ function Main() {
 
   return (
     <>
-      <h1>{`Welcome, ${user.username}`}</h1>
+      <h3>{`Welcome, ${user.username}`}</h3>
       <div
         style={{
           display: 'flex',
