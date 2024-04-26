@@ -5,7 +5,7 @@ const config = require('config');
 const { options } = require('pg/lib/defaults');
 
 const { DECLUTTER_ENV, ENV_DEFAULT } = config.get('app');
-
+console.log(path.join(__dirname, './node_modules/cirrus-ui/dist/'));
 module.exports = {
   mode: process.env.NODE_ENV || 'development',
   entry: './client/index.tsx',
@@ -34,9 +34,12 @@ module.exports = {
         }]
       },
       {
-        test: /\.(css|scss)$/,
-        exclude: /node_modules/,
-        use: ['style-loader', 'css-loader'],
+        test: /\.css$/i,
+        exclude: {
+          and: [/node_modules/],
+          not: [path.join(__dirname, './node_modules/cirrus-ui/dist/')],
+        },
+        use: ["style-loader", "css-loader"],
       },
     ],
   },

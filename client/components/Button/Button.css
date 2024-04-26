@@ -1,0 +1,19 @@
+.Button {
+  cursor: pointer;
+  text-decoration: none;
+  background-color: #4ba44f;
+  height: 80px;
+  width: 400px;
+  box-shadow: 5px 5px 5px #000;
+  border: none;
+  border-radius: 20px;
+  color: #ffffff;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.Button:active {
+  box-shadow: none;
+}

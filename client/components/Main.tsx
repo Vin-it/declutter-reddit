@@ -5,22 +5,7 @@ import SavedLink from './SavedLink/SavedLink';
 import { getLoggedInUser } from '../api/declutter-reddit-api';
 import { getSavedLinks } from '../api/reddit';
 import { REDDIT_LISTING_KIND } from '../constants/app';
-import { string } from 'prop-types';
-
-interface SavedLinks {
-  children: {
-    kind: string;
-    data: {
-      id: string;
-      link: string;
-      link_title: string;
-      title: string;
-      thumbnail: string;
-    };
-  }[];
-  after: string;
-  before: string;
-}
+import { SavedLinks } from '../utils/reddit-interfaces';
 
 function Main() {
   const [user, setUser] = useState({
@@ -38,7 +23,9 @@ function Main() {
       setUser(userData.user);
       setSavedLinks(savedLinksRes);
       setIsLoading(false);
+      console.log(savedLinksRes);
     };
+
     try {
       getComponentData();
     } catch (err: unknown) {
@@ -70,38 +57,26 @@ function Main() {
 
   return (
     <>
-      <h1>{`Welcome, ${user.username}`}</h1>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          flexWrap: 'wrap',
-          justifyContent: 'space-between',
-          alignContent: 'center',
-        }}
-      >
+      <h3>{`Welcome, ${user.username}`}</h3>
+      <div className="h-100p bg-gray-100 p-2">
         {savedLinks?.children.map((child) => (
           <SavedLink
+            data={child.data}
             key={child.data.id}
             title={
               child.kind === REDDIT_LISTING_KIND.T1
                 ? child.data.link_title
                 : child.data.title
             }
-            thumbnail={child.data.thumbnail}
+            thumbnail={child.data?.url}
           />
         ))}
       </div>
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-        }}
-      >
-        <button type="button" onClick={handlePrevious}>
+      <div>
+        <button className="btn" type="button" onClick={handlePrevious}>
           Previous
         </button>
-        <button type="button" onClick={handleNext}>
+        <button className="btn" type="button" onClick={handleNext}>
           Next
         </button>
       </div>
