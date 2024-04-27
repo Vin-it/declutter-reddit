@@ -59,7 +59,7 @@ export const Search = () => {
         <div className="flex items-center">
           <input
             checked={withImages}
-            onClick={() => {
+            onChange={() => {
               setWithImages(!withImages);
             }}
             id="checked-checkbox"
