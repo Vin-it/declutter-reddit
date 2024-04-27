@@ -71,7 +71,7 @@ export const Search = () => {
             htmlFor="checked-checkbox"
             className="ms-2 text-md font-medium"
           >
-            Checked state
+            Show images
           </label>
         </div>
       </div>
