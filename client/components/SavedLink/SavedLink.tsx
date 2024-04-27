@@ -27,7 +27,7 @@ function isValidImgSrc(thumbnail: undefined | string): boolean {
 function getImageSrc(data: SavedLinkData) {
   const mediaMetadata = data.media_metadata;
   if (mediaMetadata) {
-    return Object.keys(mediaMetadata).map((k) => mediaMetadata[k].p[2].u);
+    return Object.keys(mediaMetadata).map((k) => mediaMetadata[k]?.p?.[2]?.u);
   }
   const preview = data?.preview?.images[0].source?.url;
   if (preview) {
@@ -40,7 +40,7 @@ function getImageSrc(data: SavedLinkData) {
   return null;
 }
 
-function renderImage(data: SavedLinkData) {
+export function renderImage(data: SavedLinkData) {
   const imgSrc = getImageSrc(data);
   let url = '';
   if (Array.isArray(imgSrc)) {
@@ -52,15 +52,17 @@ function renderImage(data: SavedLinkData) {
 
   if (
     url === null ||
-    (url.indexOf('.jpg') === -1 &&
-      url.indexOf('.jpeg') === -1 &&
-      url.indexOf('.png') === -1 &&
-      url.indexOf('webp') === -1)
+    (url?.indexOf('.jpg') === -1 &&
+      url?.indexOf('.jpeg') === -1 &&
+      url?.indexOf('.png') === -1 &&
+      url?.indexOf('webp') === -1)
   ) {
     return <></>;
   }
 
-  return <img style={{ maxWidth: '220px' }} src={url.replace(/&amp;/g, '&')} />;
+  return (
+    <img style={{ maxWidth: '220px' }} src={url?.replace(/&amp;/g, '&')} />
+  );
 }
 
 export default SavedLink;
