@@ -1,6 +1,7 @@
 import { Route } from 'wouter';
 import Browse from './components/Browse/Browse';
 import { Home } from './pages/Home/Home';
+import { Search } from './pages/Search/Search';
 export const DeclutterRouter = () => {
   return (
     <>
@@ -9,6 +10,9 @@ export const DeclutterRouter = () => {
       </Route>
       <Route path="/">
         <Home />
+      </Route>
+      <Route path="/search">
+        <Search />
       </Route>
     </>
   );
