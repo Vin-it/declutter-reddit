@@ -20,7 +20,7 @@ export const SearchResultsWithImages = ({
                 {renderImage(c.data)}
                 <div className="flex flex-col justify-between p-4 leading-normal">
                   <h6 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                    {c.data.title}
+                    {c?.data?.title ?? c?.data?.link_title}
                   </h6>
                   <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
                     {c.data.subreddit_name_prefixed}

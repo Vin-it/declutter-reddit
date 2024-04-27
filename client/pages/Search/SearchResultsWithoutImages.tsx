@@ -21,7 +21,7 @@ export const SearchResultsWithoutImages = ({
                   {c.data.subreddit_name_prefixed}
                 </p>
                 <h6 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                  <div>{c?.data?.title}</div>
+                  <div>{c?.data?.title ?? c?.data?.link_title}</div>
                 </h6>
               </div>
             </div>
