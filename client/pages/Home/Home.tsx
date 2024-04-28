@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { CustomButton } from '../../components/Buttons/Buttons';
 import { SavedLinks } from '../../utils/reddit-interfaces';
-import { getSavedLinks } from '../../api/reddit';
-import { getLoggedInUser } from '../../api/declutter-reddit-api';
+import { getLoggedInUser, getSavedLinks } from '../../api/declutter-reddit-api';
 import { delay } from '../../utils/general.utils';
 import { useLocation } from 'wouter';
 

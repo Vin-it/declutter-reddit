@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react';
 
 import SavedLink from '../SavedLink/SavedLink';
 
-import { getLoggedInUser } from '../../api/declutter-reddit-api';
-import { getSavedLinks } from '../../api/reddit';
+import { getLoggedInUser, getSavedLinks } from '../../api/declutter-reddit-api';
 import { SavedLinks } from '../../utils/reddit-interfaces';
 
 function Browse() {
