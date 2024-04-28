@@ -1,11 +1,13 @@
 import express from 'express';
 import authRouter from './routes/auth';
+import { redditRouter } from './routes/reddit/reddit.router';
 
-const router = express.Router();
+const mainRouter = express.Router();
 
-router.use(authRouter);
-router.get('*', (req, res) => {
+mainRouter.use(authRouter);
+mainRouter.use(redditRouter);
+mainRouter.get('*', (req, res) => {
   res.render('index');
 });
 
-export default router;
+export { mainRouter };
