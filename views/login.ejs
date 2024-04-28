@@ -9,20 +9,14 @@
 <body class="dark:bg-slate-400">
     <div class="flex h-screen bg-slate-50 dark:bg-slate-400">
         <div class="m-auto">
-            <div
-                class="h-30 grid grid-cols-1 divide-x font-mono text-center font-bold leading-6 overflow-hidden dark:divide-slate-700">
-                <p>welcome to declutter</p>
-                <div class="rounded-b-md shadow-lg cursor-pointer p-5 text-slate-400 bg-white dark:bg-slate-800">
-                    <button type="button"
-                        className="text-white text-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                        <a
-                            href="https://www.reddit.com/api/v1/authorize?client_id=<%=clientId%>&response_type=code&state=dalsdkakd&redirect_uri=<%=redirectUri%>&duration=permanent&scope=identity,history,read">
-                        LOGIN WITH REDDIT
-                    </a>
-                    </button>
-                    <br />
+            <p class="font-mono text-center font-bold leading-6">welcome to declutter</p>
+            <a
+                href="https://www.reddit.com/api/v1/authorize?client_id=<%=clientId%>&response_type=code&state=dalsdkakd&redirect_uri=<%=redirectUri%>&duration=permanent&scope=identity,history,read">
+                <div
+                    class="shadow-lg hover:shadow-none font-mono text-center font-bold leading-6 overflow-hidden dark:divide-slate-700 rounded-b-md cursor-pointer p-5 text-slate-400 bg-white dark:bg-slate-800">
+                    LOGIN WITH REDDIT
                 </div>
-            </div>
+            </a>
         </div>
     </div>
 </body>
