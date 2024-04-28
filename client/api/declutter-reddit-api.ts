@@ -28,7 +28,7 @@ export const getSavedLinks = async (
 ) => {
   try {
     const response = await fetch(
-      `${BASE_URL}/saved`,
+      `${BASE_URL}/saved?after=${after}&before=${before}`,
       {
         method: 'GET',
       }
