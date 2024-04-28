@@ -1,11 +1,11 @@
 import express from 'express';
 import authRouter from './routes/auth';
 
-const router = express.Router();
+const mainRouter = express.Router();
 
-router.use(authRouter);
-router.get('*', (req, res) => {
+mainRouter.use(authRouter);
+mainRouter.get('*', (req, res) => {
   res.render('index');
 });
 
-export default router;
+export { mainRouter };

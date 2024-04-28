@@ -10,7 +10,7 @@ import {
 } from "./database/knex";
 import { init as initObjection } from "./database/objection";
 import { init as initDebug, logServer, logDatabase, getLogger } from "./utils/debug";
-import router from "./router";
+import { mainRouter } from "./router";
 import errorHandler from "./middleware/error-handler";
 import Knex from "knex";
 import { User } from "./database/models";
@@ -42,7 +42,7 @@ function initMiddlewares(app: Express) {
   );
   app.use("/static", express.static(path.join(__dirname, process.env.DECLUTTER_ENV === 'local' ? "../public" : "../../public")));
   app.use("/static", express.static(path.join(__dirname, process.env.DECLUTTER_ENV === 'local' ? '../build' : '../../build')));
-  app.use(router);
+  app.use(mainRouter);
   app.use(errorHandler);
 }
 
