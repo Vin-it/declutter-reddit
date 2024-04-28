@@ -100,7 +100,25 @@ async function refreshAccessToken (refreshToken: string) {
   }
 }
 
+
+const fetchSavedLinks = async (accessToken: string, username: string, after?: string, before?: string) => {
+  try {
+    const response = await axios.get(`${REDDIT_API_BASE_URL}/user/${username}/saved?after=${after}&before=${before}`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      }
+    })
+    return response
+  } catch (error) {
+    if (error instanceof Error) {
+      logRequest('Error while making a request to get user info from reddit', error.message)
+    }
+    throw new RedditRequestError(REDDIT_REQUEST_ERR_MESSAGE)
+  }
+};
+
 export {
+  fetchSavedLinks,
   exchangeCodeForTokensReq,
   getUserInfo,
   refreshAccessToken
