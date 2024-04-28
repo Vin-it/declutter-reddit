@@ -18,9 +18,9 @@ const ALL_ENV_ARRAY = [
 
 export const BASE_URL_LIST = {
   [ENV_LOCAL]: 'http://localhost:3000',
-  [ENV_DEVELOPMENT]: 'https://declutter-dev.herokuapp.com',
-  [ENV_STAGING]: 'https://declutter-staging.herokuapp.com',
-  [ENV_PRODUCTION]: 'https://declutter-reddit.herokuapp.com'
+  [ENV_DEVELOPMENT]: 'https://search-saved-reddit.xyz',
+  [ENV_STAGING]: 'https://search-saved-reddit.xyz',
+  [ENV_PRODUCTION]: 'https://search-saved-reddit.xyz'
 }
 
 const isEnvTypeSafe = (strEnv: string | undefined): strEnv is ALL_ENVS => {
