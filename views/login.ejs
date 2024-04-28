@@ -3,23 +3,19 @@
 
 <head>
     <link rel="stylesheet" href="static/assets/css/login.css" />
-    <title>Reddit Personal Client</title>
+    <title>Declutter - Search through saved reddit posts</title>
 </head>
 
-<body>
-    <div class="user-registration">
-        <div class="logo-container-div">
-            <div class="logo-text-div">Declutter</div>
-            <div class="logo-div">
-                <img class="reddit-logo" src="static/assets/images/reddit-logo.svg" />
-            </div>
-        </div>
-        <div class="sign-up-link-dev">
-            <a class="signup-anchor"
+<body class="dark:bg-slate-400">
+    <div class="flex h-screen bg-slate-50 dark:bg-slate-400">
+        <div class="m-auto">
+            <p class="font-mono text-center font-bold leading-6">welcome to declutter</p>
+            <a
                 href="https://www.reddit.com/api/v1/authorize?client_id=<%=clientId%>&response_type=code&state=dalsdkakd&redirect_uri=<%=redirectUri%>&duration=permanent&scope=identity,history,read">
-                <button type="button" class="sign-up-button">
+                <div
+                    class="shadow-lg hover:shadow-none font-mono text-center font-bold leading-6 overflow-hidden dark:divide-slate-700 rounded-b-md cursor-pointer p-5 text-slate-400 bg-white dark:bg-slate-800">
                     LOGIN WITH REDDIT
-                </button>
+                </div>
             </a>
         </div>
     </div>
