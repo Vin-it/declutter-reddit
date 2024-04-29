@@ -75,7 +75,6 @@ export default async function getRedirect(req: Request, res: Response) {
                 ? insertedUser.isImported
                 : false,
           },
-          accessToken,
           expiresOn,
         );
 

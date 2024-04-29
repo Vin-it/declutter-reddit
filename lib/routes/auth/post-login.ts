@@ -84,13 +84,12 @@ async function postLogin(req: Request, res: Response, next: NextFunction) {
         username: user.username,
         isImported: user.isImported,
       },
-      user.access_token,
       user.expires_on,
     );
   } else {
     try {
-      const { response, expiresOn } = await handleExpiredAccessToken(username);
-      setSession(req, user, response.data.access_token, expiresOn);
+      const { expiresOn } = await handleExpiredAccessToken(username);
+      setSession(req, user, expiresOn);
     } catch (error) {
       if (error instanceof Error) {
         logRequest('Error while handling expired access token', error.message);

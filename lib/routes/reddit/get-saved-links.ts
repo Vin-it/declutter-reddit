@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { fetchSavedLinks } from '../../services/reddit';
+import { getUserByUsername } from '../../queries/users';
 
 export const getSavedLinks = async (req: Request, res: Response) => {
   if (!res.locals.isInSession || !req.session.user) {
@@ -12,8 +13,9 @@ export const getSavedLinks = async (req: Request, res: Response) => {
     )
       return;
     const user = req.session.user;
+    const [userFromDb] = await getUserByUsername(user.username);
     const response = await fetchSavedLinks(
-      user.accessToken,
+      userFromDb.access_token,
       user.username,
       after,
       before,
