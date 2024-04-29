@@ -1,6 +1,6 @@
 import config from 'config'
 
-const { SERVER_ERROR } = config.get<{ SERVER_ERROR: any }>('errors.codes')
+const { SERVER_ERROR } = config.get<{ SERVER_ERROR: unknown }>('errors.codes')
 
 function makeError (errorObject = {
   message: 'Something went wrong!',

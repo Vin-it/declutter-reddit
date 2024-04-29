@@ -1,4 +1,3 @@
-import { Request, Response } from 'express';
 import express from 'express';
 import { isInSession } from '../../middleware/user';
 import { getSavedLinks } from './get-saved-links';

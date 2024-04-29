@@ -9,7 +9,7 @@ import {
   getInstance as getKnexInstance,
 } from "./database/knex";
 import { init as initObjection } from "./database/objection";
-import { init as initDebug, logServer, logDatabase, getLogger } from "./utils/debug";
+import { init as initDebug, logServer, logDatabase, } from "./utils/debug";
 import { mainRouter } from "./router";
 import errorHandler from "./middleware/error-handler";
 import Knex from "knex";
