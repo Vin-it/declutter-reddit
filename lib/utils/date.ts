@@ -1,5 +1,5 @@
-function getMilliseconds (seconds: number) {
-  return seconds * 1000
+function getMilliseconds(seconds: number) {
+  return seconds * 1000;
 }
 
 /**
@@ -8,10 +8,8 @@ function getMilliseconds (seconds: number) {
  *
  * @param {number} seconds - number of seconds
  */
-function calcExpiresOn (seconds: number) {
-  return new Date(new Date().getTime() + getMilliseconds(seconds))
+function calcExpiresOn(seconds: number) {
+  return new Date(new Date().getTime() + getMilliseconds(seconds));
 }
 
-export {
-  calcExpiresOn
-}
+export { calcExpiresOn };

@@ -1,29 +1,29 @@
-import { type NextFunction, type Request, type Response } from 'express'
+import { type NextFunction, type Request, type Response } from 'express';
 
-import { logServer } from '../utils/debug'
+import { logServer } from '../utils/debug';
 
-function defaultErrorHandler (
+function defaultErrorHandler(
   error: Error & { expose: boolean },
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) {
   if (!error) {
-    next()
+    next();
   }
 
-  logServer('defaultErrorHandler', error.message)
+  logServer('defaultErrorHandler', error.message);
   if (error.expose) {
     res.json({
       success: false,
-      message: error.message
-    })
+      message: error.message,
+    });
   } else {
     res.json({
       success: false,
-      message: 'Something went wrong'
-    })
+      message: 'Something went wrong',
+    });
   }
 }
 
-export default defaultErrorHandler
+export default defaultErrorHandler;

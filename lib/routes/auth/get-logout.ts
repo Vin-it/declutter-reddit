@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Request, Response } from 'express';
 
 function getLogout(req: Request, res: Response) {
   req.session.destroy();

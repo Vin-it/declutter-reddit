@@ -1,15 +1,15 @@
-import { AxiosResponse } from "axios";
-import { Request, Response } from "express";
-import User from "../../database/models/User";
-import { getUserByUsername, updateUser, insertUser } from "../../queries/users";
+import { AxiosResponse } from 'axios';
+import { Request, Response } from 'express';
+import User from '../../database/models/User';
+import { getUserByUsername, updateUser, insertUser } from '../../queries/users';
 import {
   exchangeCodeForTokensReq,
   getUserInfo,
   Tokens,
-} from "../../services/reddit";
-import { calcExpiresOn } from "../../utils/date";
-import { logRequest } from "../../utils/debug";
-import { setSession } from "../../utils/set-session";
+} from '../../services/reddit';
+import { calcExpiresOn } from '../../utils/date';
+import { logRequest } from '../../utils/debug';
+import { setSession } from '../../utils/set-session';
 
 export default async function getRedirect(req: Request, res: Response) {
   let user;
@@ -52,13 +52,13 @@ export default async function getRedirect(req: Request, res: Response) {
             access_token: accessToken,
             refresh_token: refreshToken,
           },
-          { id: fetchedUser.id, username: fetchedUser.name }
+          { id: fetchedUser.id, username: fetchedUser.name },
         );
       } else if (userExists.length === 0) {
         insertedUser = await insertUser(user);
       } else {
         throw new Error(
-          "User array did not match 0 (user did not exist) or 1 (exactly one user exists)"
+          'User array did not match 0 (user did not exist) or 1 (exactly one user exists)',
         );
       }
 
@@ -72,14 +72,14 @@ export default async function getRedirect(req: Request, res: Response) {
             isImported: userExists.length
               ? userExists[0].isImported
               : insertedUser
-              ? insertedUser.isImported
-              : false,
+                ? insertedUser.isImported
+                : false,
           },
           accessToken,
-          expiresOn
+          expiresOn,
         );
 
-        res.redirect("/");
+        res.redirect('/');
       }
     }
   } catch (error) {

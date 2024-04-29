@@ -16,7 +16,7 @@ export const getSavedLinks = async (req: Request, res: Response) => {
       user.accessToken,
       user.username,
       after,
-      before
+      before,
     );
     res.status(200).json(response.data);
   }

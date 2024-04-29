@@ -1,5 +1,3 @@
 class RedditRequestError extends Error {}
 
-export {
-  RedditRequestError
-}
+export { RedditRequestError };

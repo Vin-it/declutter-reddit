@@ -9,7 +9,7 @@ class User extends Model {
 
   expires_on!: Date | string;
 
-  isImported!: boolean; 
+  isImported!: boolean;
 
   username!: string;
 
