@@ -22,7 +22,6 @@ declare module 'express-session' {
   interface SessionData {
     user: Partial<User> & {
       username: string;
-      accessToken: string;
       expiresOn: string | Date;
     };
     destroy: () => void;
