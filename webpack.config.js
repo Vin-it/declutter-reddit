@@ -18,6 +18,7 @@ module.exports = {
     }),
     new webpack.EnvironmentPlugin({
       DECLUTTER_ENV: DECLUTTER_ENV || ENV_DEFAULT,
+      BASE_URL: 'http://localhost:3000'
     }),
   ],
   resolve: {
