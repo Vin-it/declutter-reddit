@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Request, Response } from 'express';
 
 function getLoggedInUser(req: Request, res: Response) {
   if (!res.locals.isInSession) {

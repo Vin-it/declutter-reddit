@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Request, Response } from 'express';
 import express from 'express';
 
 import { isInSession } from '../../middleware/user';
@@ -11,7 +11,6 @@ const authRouter = express.Router();
 
 authRouter.use(express.urlencoded({ extended: true }));
 authRouter.use(express.json());
-
 
 authRouter.get('/', isInSession, (req: Request, res: Response) => {
   if (!res.locals.isInSession) {

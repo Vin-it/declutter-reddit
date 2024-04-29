@@ -1,37 +1,37 @@
-import { type PartialModelObject } from 'objection'
-import { User } from '../database/models'
+import { type PartialModelObject } from 'objection';
+import { User } from '../database/models';
 
-async function getUserByUsername (username: string, trx = undefined) {
-  return await User.query(trx).where('username', username)
+async function getUserByUsername(username: string, trx = undefined) {
+  return await User.query(trx).where('username', username);
 }
 
-function updateUser (
+function updateUser(
   patchClause: PartialModelObject<User>,
-  whereClause: Partial<User>
+  whereClause: Partial<User>,
 ) {
-  return User.query().patch(patchClause).where(whereClause)
+  return User.query().patch(patchClause).where(whereClause);
 }
 
-function insertUser ({
+function insertUser({
   id,
   username,
   refreshToken,
   accessToken,
-  expiresOn
+  expiresOn,
 }: {
-  id: number
-  username: string
-  refreshToken: string
-  accessToken: string
-  expiresOn: string | Date
+  id: number;
+  username: string;
+  refreshToken: string;
+  accessToken: string;
+  expiresOn: string | Date;
 }) {
   return User.query().insert({
     id,
     username,
     refresh_token: refreshToken,
     access_token: accessToken,
-    expires_on: expiresOn
-  } as unknown as User)
+    expires_on: expiresOn,
+  } as unknown as User);
 }
 
-export { getUserByUsername, insertUser, updateUser }
+export { getUserByUsername, insertUser, updateUser };

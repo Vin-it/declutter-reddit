@@ -6,7 +6,7 @@ export function delay(ms: number) {
 
 export function searchSavedLinkChild(
   c: SavedLinks['children'][0],
-  searchTerm: string
+  searchTerm: string,
 ): Boolean {
   return (
     Boolean(
@@ -14,7 +14,7 @@ export function searchSavedLinkChild(
         (c?.data?.title?.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1 ||
           c?.data?.subreddit_name_prefixed
             ?.toLowerCase()
-            .indexOf(searchTerm.toLowerCase()) > -1)
+            .indexOf(searchTerm.toLowerCase()) > -1),
     ) || Boolean(searchTerm === '')
   );
 }

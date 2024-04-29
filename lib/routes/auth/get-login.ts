@@ -12,6 +12,6 @@ const getLogin = (req: Request, res: Response) => {
     clientId: CLIENT_ID,
     redirectUri: REDIRECT_URI,
   });
-}
+};
 
 export default getLogin;

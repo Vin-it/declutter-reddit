@@ -20,7 +20,7 @@ function SavedLink({ data }: SavedLinkProps) {
 function isValidImgSrc(thumbnail: undefined | string): boolean {
   return Boolean(
     thumbnail &&
-      (thumbnail.indexOf('http') > -1 || thumbnail.indexOf('https') > -1)
+      (thumbnail.indexOf('http') > -1 || thumbnail.indexOf('https') > -1),
   );
 }
 
