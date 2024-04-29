@@ -1,5 +1,9 @@
 import { renderImage } from '../../components/SavedLink/SavedLink';
-import { searchSavedLinkChild } from '../../utils/general.utils';
+import {
+  getRedditLink,
+  getSubredditLink,
+  searchSavedLinkChild,
+} from '../../utils/general.utils';
 import { SavedLinks } from '../../utils/reddit-interfaces';
 
 export const SearchResultsWithImages = ({
@@ -20,10 +24,17 @@ export const SearchResultsWithImages = ({
                 {renderImage(c.data)}
                 <div className="flex flex-col justify-between p-4 leading-normal">
                   <h6 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                    {c?.data?.title ?? c?.data?.link_title}
+                    <a target="_blank" href={getRedditLink(c?.data?.permalink)}>
+                      {c?.data?.title ?? c?.data?.link_title}
+                    </a>
                   </h6>
                   <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                    {c.data.subreddit_name_prefixed}
+                    <a
+                      target="_blank"
+                      href={getSubredditLink(c?.data?.subreddit_name_prefixed)}
+                    >
+                      {c.data.subreddit_name_prefixed}
+                    </a>
                   </p>
                 </div>
               </div>

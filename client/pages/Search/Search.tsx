@@ -21,7 +21,7 @@ export const Search = () => {
   return (
     <div className="py-3">
       <div className="flex flex-row justify-center gap-9">
-        <form className="">
+        <form>
           <label
             htmlFor="default-search"
             className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
