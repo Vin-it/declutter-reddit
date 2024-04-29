@@ -18,3 +18,11 @@ export function searchSavedLinkChild(
     ) || Boolean(searchTerm === '')
   );
 }
+
+export const getRedditLink = (permalink: string) => {
+  return `https://reddit.com${permalink}`;
+};
+
+export const getSubredditLink = (subreddit_name_prefixed: string) => {
+  return `https://reddit.com/${subreddit_name_prefixed}`;
+};
