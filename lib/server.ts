@@ -3,6 +3,9 @@ import express, { type Express } from 'express';
 import connectSessionKnex from 'connect-session-knex';
 import path from 'path';
 import session from 'express-session';
+import fs from 'node:fs';
+import https from 'node:https';
+import http from 'node:http';
 
 import {
   init as initKnex,
@@ -103,9 +106,24 @@ async function initApp() {
   await initMigrations(knex(), RETRY_COUNT);
   initMiddlewares(app);
 
-  app.listen(PORT, () => {
-    logServer('App is listening to', String(PORT));
-  });
+  if (process.env.CERT_PATH && process.env.KEY_PATH) {
+    const key = fs.readFileSync(process.env.KEY_PATH);
+    const cert = fs.readFileSync(process.env.CERT_PATH);
+    const options = {
+      key,
+      cert,
+    };
+    const server = https.createServer(options, app);
+
+    server.listen(PORT, () => {
+      logServer('Running on port', String(PORT));
+    });
+  } else {
+    const server = http.createServer(app);
+    server.listen(PORT, () => {
+      logServer('App is listening to', String(PORT));
+    });
+  }
 }
 
 export default initApp;
