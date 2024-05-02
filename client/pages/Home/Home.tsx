@@ -8,11 +8,7 @@ import { Nav } from '../../components/Nav/Nav';
 
 export const Home = () => {
   const [, navigate] = useLocation();
-  const [user, setUser] = useState({
-    username: '',
-  });
   const [count, setCount] = useState(0);
-  const [savedLinks, setSavedLinks] = useState<SavedLinks | undefined>();
   const handleSearchWithoutImport = async () => {
     const { data: userData } = await getLoggedInUser();
     let tempSavedLinks: SavedLinks | null = null;
@@ -37,11 +33,8 @@ export const Home = () => {
     <>
       <Nav />
       <div className="mt-32 flex justify-center bg-slate-50 dark:bg-slate-400">
-        <div className="">
-          <div
-            style={{ width: '48rem' }}
-            className="h-30 grid grid-cols-1 divide-x overflow-hidden rounded-lg text-center font-mono text-sm font-bold leading-6 shadow-lg dark:divide-slate-700"
-          >
+        <div>
+          <div className="h-30 grid grid-cols-1 divide-x overflow-hidden rounded-lg text-center font-mono text-sm font-bold leading-6 shadow-lg dark:divide-slate-700">
             <div className="bg-white p-4 text-slate-400 dark:bg-slate-800">
               <CustomButton
                 onClick={handleSearchWithoutImport}
@@ -49,7 +42,7 @@ export const Home = () => {
               />
               <br />
               {count === 0 ? (
-                <ul>
+                <ul className="text-left">
                   <li>
                     - We never save your data on our server. It all stays in
                     your browser.
