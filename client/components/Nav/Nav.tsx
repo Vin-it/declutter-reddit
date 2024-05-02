@@ -40,7 +40,7 @@ export const Nav = () => {
           <ul className="mt-4 flex flex-col rounded-lg bg-gray-50 font-medium md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-transparent rtl:space-x-reverse dark:border-gray-700 dark:bg-gray-800 md:dark:bg-transparent">
             <li>
               <a
-                href="#"
+                href="/"
                 className="block rounded px-3 py-2 text-center text-white hover:bg-gray-100 hover:text-white md:border-0 md:p-0 md:text-gray-900 md:hover:bg-transparent dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
               >
                 home
@@ -48,7 +48,7 @@ export const Nav = () => {
             </li>
             <li>
               <a
-                href="#"
+                href="/about"
                 className="block rounded px-3 py-2 text-center text-white hover:bg-gray-100 hover:text-white md:border-0 md:p-0 md:text-gray-900 md:hover:bg-transparent dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
               >
                 about
