@@ -3,9 +3,13 @@ import Browse from './components/Browse/Browse';
 import { Home } from './pages/Home/Home';
 import { Search } from './pages/Search/Search';
 import { LoginPage } from './pages/Login/Login.page';
+import { AboutPage } from './pages/About/About.page';
 export const DeclutterRouter = () => {
   return (
     <>
+      <Route path="/about">
+        <AboutPage />
+      </Route>
       <Route path="/login">
         <LoginPage />
       </Route>
