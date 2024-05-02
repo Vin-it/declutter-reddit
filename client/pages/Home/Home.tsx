@@ -32,7 +32,7 @@ export const Home = () => {
   return (
     <>
       <Nav />
-      <div className="mt-32 flex justify-center bg-slate-50 dark:bg-slate-400">
+      <div className="mt-20 flex justify-center bg-slate-50 px-3 sm:mt-32 md:px-0 dark:bg-slate-400">
         <div>
           <div className="h-30 grid grid-cols-1 divide-x overflow-hidden rounded-lg text-center font-mono text-sm font-bold leading-6 shadow-lg dark:divide-slate-700">
             <div className="bg-white p-4 text-slate-400 dark:bg-slate-800">

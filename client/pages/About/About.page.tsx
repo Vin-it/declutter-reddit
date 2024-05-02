@@ -4,7 +4,7 @@ export const AboutPage = () => {
   return (
     <>
       <Nav />
-      <div className="flex flex-col flex-wrap content-center justify-center">
+      <div className="mx:px-0 flex flex-col flex-wrap content-center justify-center px-3">
         <div className="mt-10 max-w-2xl">
           <h1 className="text-center font-serif text-4xl">about declutter</h1>
           <p className="mt-10">
