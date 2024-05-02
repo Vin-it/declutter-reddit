@@ -6,7 +6,7 @@ export const Nav = () => {
   return (
     <nav className="border-gray-200">
       <div className="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-4">
-        <a href="#" className="flex items-center space-x-3 rtl:space-x-reverse">
+        <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
           <span className="self-center whitespace-nowrap text-2xl font-semibold dark:text-black">
             declutter
           </span>
