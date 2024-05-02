@@ -18,7 +18,9 @@ module.exports = {
     }),
     new webpack.EnvironmentPlugin({
       DECLUTTER_ENV: DECLUTTER_ENV || ENV_DEFAULT,
-      BASE_URL: 'http://localhost:3000'
+      BASE_URL: 'http://localhost:3000',
+      REDDIT_APP_CLIENT_ID: '',
+      REDDIT_APP_REDIRECT_URI: '',
     }),
   ],
   resolve: {
