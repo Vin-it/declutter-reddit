@@ -9,7 +9,7 @@ export const AboutPage = () => {
           <h1 className="text-center font-serif text-4xl">about declutter</h1>
           <p className="mt-10">
             I started this as a hobby project during my college days. I am
-            reviving it because I wanted to work on a side project. If people
+            reviving it now because I want to work on a side project. If people
             find it useful I will continue working on it otherwise I give it a
             year of maintenance and improvements from now. That should put the
             date to May 2025 when I will re-evaluate this.
