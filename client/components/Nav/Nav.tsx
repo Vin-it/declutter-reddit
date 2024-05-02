@@ -1,4 +1,8 @@
+import { useLocation } from 'wouter';
+
 export const Nav = () => {
+  const [location] = useLocation();
+
   return (
     <nav className="border-gray-200">
       <div className="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-4">
@@ -50,6 +54,16 @@ export const Nav = () => {
                 about
               </a>
             </li>
+            {location === '/login' ? null : (
+              <li>
+                <a
+                  href="/logout"
+                  className="block rounded px-3 py-2 text-center text-white hover:bg-gray-100 hover:text-white md:border-0 md:p-0 md:text-gray-900 md:hover:bg-transparent dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                >
+                  logout
+                </a>
+              </li>
+            )}
           </ul>
         </div>
       </div>
