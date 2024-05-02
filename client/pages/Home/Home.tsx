@@ -4,6 +4,7 @@ import { SavedLinks } from '../../utils/reddit-interfaces';
 import { getLoggedInUser, getSavedLinks } from '../../api/declutter-reddit-api';
 import { delay } from '../../utils/general.utils';
 import { useLocation } from 'wouter';
+import { Nav } from '../../components/Nav/Nav';
 
 export const Home = () => {
   const [, navigate] = useLocation();
@@ -24,7 +25,7 @@ export const Home = () => {
       response = await getSavedLinks(userData.user, {
         after: response.data.after,
       });
-      tempSavedLinks?.children.push(...response?.data?.children);
+      tempSavedLinks?.children.push(...response.data.children);
     }
 
     if (tempSavedLinks) {
@@ -33,39 +34,42 @@ export const Home = () => {
   };
 
   return (
-    <div className="flex h-screen bg-slate-50 dark:bg-slate-400">
-      <div className="m-auto">
-        <div
-          style={{ width: '48rem' }}
-          className="h-30 grid grid-cols-1 divide-x font-mono text-sm text-center font-bold leading-6 rounded-lg shadow-lg overflow-hidden dark:divide-slate-700"
-        >
-          <div className="p-4 text-slate-400 bg-white dark:bg-slate-800">
-            <CustomButton
-              onClick={handleSearchWithoutImport}
-              text={'Click here to start'}
-            />
-            <br />
-            {count === 0 ? (
-              <ul>
-                <li>
-                  - We never save your data on our server. It all stays in your
-                  browser.
-                </li>
-                <li>
-                  - One you leave the search page you will have to start again.
-                  (But you can refresh it)
-                </li>
-                <li>
-                  - You can report bugs or request features at -
-                  decluttereddit@gmail.com
-                </li>
-              </ul>
-            ) : (
-              `Loaded ${count} results...`
-            )}
+    <>
+      <Nav />
+      <div className="mt-32 flex justify-center bg-slate-50 dark:bg-slate-400">
+        <div className="">
+          <div
+            style={{ width: '48rem' }}
+            className="h-30 grid grid-cols-1 divide-x overflow-hidden rounded-lg text-center font-mono text-sm font-bold leading-6 shadow-lg dark:divide-slate-700"
+          >
+            <div className="bg-white p-4 text-slate-400 dark:bg-slate-800">
+              <CustomButton
+                onClick={handleSearchWithoutImport}
+                text={'Click here to start'}
+              />
+              <br />
+              {count === 0 ? (
+                <ul>
+                  <li>
+                    - We never save your data on our server. It all stays in
+                    your browser.
+                  </li>
+                  <li>
+                    - One you leave the search page you will have to start
+                    again. (But you can refresh it)
+                  </li>
+                  <li>
+                    - You can report bugs or request features at -
+                    decluttereddit@gmail.com
+                  </li>
+                </ul>
+              ) : (
+                `Loaded ${count} results...`
+              )}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
