@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import { useLocation } from 'wouter';
 
 export const Nav = () => {
+  const [menuVisible, setMenuVisible] = useState(true);
   const [location] = useLocation();
 
   return (
@@ -12,6 +14,7 @@ export const Nav = () => {
           </span>
         </a>
         <button
+          onClick={() => setMenuVisible(!menuVisible)}
           id="collapse-button"
           data-collapse-toggle="navbar-solid-bg"
           type="button"
@@ -36,7 +39,10 @@ export const Nav = () => {
             />
           </svg>
         </button>
-        <div className="hidden w-full md:block md:w-auto" id="navbar-solid-bg">
+        <div
+          className={`${menuVisible ? 'hidden' : ''} w-full md:block md:w-auto`}
+          id="navbar-solid-bg"
+        >
           <ul className="mt-4 flex flex-col rounded-lg bg-gray-50 font-medium md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-transparent rtl:space-x-reverse dark:border-gray-700 dark:bg-gray-800 md:dark:bg-transparent">
             <li>
               <a
